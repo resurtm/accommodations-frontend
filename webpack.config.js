@@ -16,13 +16,22 @@ module.exports = {
         use: 'babel-loader',
       },
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          use: 'css-loader',
+        test: /\.(css|scss)$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {loader: 'css-loader'},
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => [require('precss'), require('autoprefixer')],
+              },
+            },
+            {loader: 'sass-loader'},
+          ],
         }),
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|svg|gif|jpg|jpeg|woff|woff2|eot|ttf)$/,
         use: 'file-loader',
       },
     ],
@@ -34,6 +43,8 @@ module.exports = {
     new ExtractTextPlugin('bundle.css'),
   ],
   resolve: {
+    modules: ['node_modules', 'src'],
     extensions: ['.js', '.jsx'],
   },
+  devtool: 'eval-source-map',
 };
