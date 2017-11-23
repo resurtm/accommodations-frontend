@@ -58,11 +58,69 @@ class Board extends Component {
   }
 }
 
+class TemperatureInput extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.props.onTemperatureChanged(e.target.value, this.props.value);
+  }
+
+  render() {
+    return (
+      <input type="text" value={this.props.value} onChange={this.handleChange}/>
+    );
+  }
+}
+
+function fahrToCels(x) {
+  const v = parseFloat(x);
+  return isNaN(v) ? x : v * 9 / 5 + 32;
+}
+
+function celsToFahr(x) {
+  const v = parseFloat(x);
+  return isNaN(v) ? x : v * 1.8 + 32;
+}
+
+class TemperatureConvertor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 100,
+      type: 'c',
+    };
+    this.handleTemperatureChange = this.handleTemperatureChange.bind(this);
+  }
+
+  handleTemperatureChange(value, type) {
+    this.setState({value, type});
+  }
+
+  render() {
+    const celsValue = this.state.type === 'c' ? this.state.value : fahrToCels(this.state.value);
+    const fahrValue = this.state.type === 'f' ? this.state.value : celsToFahr(this.state.value);
+
+    return (
+      <div>
+        <TemperatureInput type="c" value={celsValue}
+                          onTemperatureChanged={v => this.handleTemperatureChange(v, 'c')}/>
+        <TemperatureInput type="f" value={fahrValue}
+                          onTemperatureChanged={v => this.handleTemperatureChange(v, 'f')}/>
+      </div>
+    );
+  }
+}
+
 export default class Hello extends Component {
   render() {
     return (
       <div>
         <Board/>
+        <TemperatureConvertor/>
       </div>
     );
   }
