@@ -7,7 +7,9 @@ export default class Month extends React.Component {
         &nbsp;
       </td>
     ) : (
-      <td className={this.props.daySelected ? 'selected-day standard-day has-text-centered' : 'standard-day has-text-centered'}
+      <td className={this.props.daySelected
+        ? 'selected-day standard-day has-text-centered'
+        : 'standard-day has-text-centered'}
           onClick={e => this.props.onDaySelected(e, this.props.day)}>
         {this.props.day}
       </td>
