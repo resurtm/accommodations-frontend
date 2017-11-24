@@ -1,47 +1,25 @@
 import React from 'react';
+import _ from 'lodash';
+import Month from 'editor/calendar/month';
 
 export default class Calendar extends React.Component {
   render() {
+    const months = _.range(1, 5).map(i =>
+      _.range((i - 1) * 3 + 1, (i - 1) * 3 + 4)
+    );
+
     return (
       <div id="calendar">
 
-        <div className="columns">
-          <div className="column is-one-third">
-            <div className="tile is-primary">
-              test
-            </div>
+        {months.map((group, groupIndex) =>
+          <div key={groupIndex} className="columns">
+            {group.map((month, monthIndex) =>
+              <div key={monthIndex} className="column is-one-third">
+                <Month month={month} year={this.props.year}/>
+              </div>
+            )}
           </div>
-          <div className="column is-one-third">
-            2
-          </div>
-          <div className="column is-one-third">
-            3
-          </div>
-        </div>
-
-        <div className="columns">
-          <div className="column is-one-third">
-            1
-          </div>
-          <div className="column is-one-third">
-            2
-          </div>
-          <div className="column is-one-third">
-            3
-          </div>
-        </div>
-
-        <div className="columns">
-          <div className="column is-one-third">
-            1
-          </div>
-          <div className="column is-one-third">
-            2
-          </div>
-          <div className="column is-one-third">
-            3
-          </div>
-        </div>
+        )}
 
       </div>
     );
