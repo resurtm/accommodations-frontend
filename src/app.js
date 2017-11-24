@@ -1,16 +1,19 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {render} from 'react-dom';
 
-import './style.css';
+import 'style.scss';
 
-export default class Hello extends Component {
+import MainLayout from 'layout/main-layout';
+import RoomsEditor from 'editor/rooms-editor';
+
+export default class App extends React.Component {
   render() {
     return (
-      <div>
-        Hello, React!
-      </div>
+      <MainLayout>
+        <RoomsEditor/>
+      </MainLayout>
     );
   }
 }
 
-render(<Hello/>, document.getElementById('app'));
+render(<App/>, document.getElementById('app'));
