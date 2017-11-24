@@ -17,7 +17,7 @@ export default class Calendar extends React.Component {
     });
 
     return (
-      <div id="calendar">
+      <div id="calendar" onClick={this.props.onCalendarClick}>
         {months.map((group, groupIndex) =>
           <div key={groupIndex} className="columns">
             {group.map((month, monthIndex) =>

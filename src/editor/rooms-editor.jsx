@@ -2,6 +2,7 @@ import React from 'react';
 import RoomSelector from 'editor/room-selector';
 import YearSelector from 'editor/year-selector';
 import Calendar from 'editor/calendar/calendar';
+import SpotsEditor from 'editor/form/spots-editor';
 
 export default class RoomsEditor extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export default class RoomsEditor extends React.Component {
 
     this.handleActiveYearChanged = this.handleActiveYearChanged.bind(this);
     this.handleOnDaySelected = this.handleOnDaySelected.bind(this);
+    this.handleCalendarClick = this.handleCalendarClick.bind(this);
   }
 
   handleActiveYearChanged(activeYear) {
@@ -26,6 +28,7 @@ export default class RoomsEditor extends React.Component {
   }
 
   handleOnDaySelected(e, day, month) {
+    e.stopPropagation();
     const shiftKey = e.shiftKey;
     this.setState(prevState => {
       if (!shiftKey || prevState.lastSelectedDay === null) {
@@ -65,6 +68,13 @@ export default class RoomsEditor extends React.Component {
     });
   }
 
+  handleCalendarClick() {
+    this.setState({
+      selectedDays: [],
+      lastSelectedDay: null,
+    });
+  }
+
   render() {
     return (
       <div className="columns">
@@ -82,12 +92,13 @@ export default class RoomsEditor extends React.Component {
 
           <Calendar year={this.state.activeYear}
                     selectedDays={this.state.selectedDays}
-                    onDaySelected={this.handleOnDaySelected}/>
+                    onDaySelected={this.handleOnDaySelected}
+                    onCalendarClick={this.handleCalendarClick}/>
 
         </div>
         <div className="column">
 
-          sidebar
+          <SpotsEditor hasSelectedDays={this.state.selectedDays.length > 0}/>
 
         </div>
       </div>
