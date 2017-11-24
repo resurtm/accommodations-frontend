@@ -6,7 +6,6 @@ export default class YearSelector extends React.Component {
       <div className="field">
         <label className="label">Select Room:</label>
         <div className="control">
-
           <div className="field is-grouped">
             <div className="control">
               <button className="button">2016</button>
@@ -21,7 +20,6 @@ export default class YearSelector extends React.Component {
               <button className="button">2019</button>
             </div>
           </div>
-
         </div>
       </div>
     );
