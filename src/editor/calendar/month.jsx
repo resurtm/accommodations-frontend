@@ -1,5 +1,6 @@
 import React from 'react';
-import {daysInMonth, shortWeekDays, weekDay} from 'tools';
+import Day from 'editor/calendar/day';
+import {daysInMonth, shortWeekDays, weekDay, monthNames} from 'tools';
 
 export default class Month extends React.Component {
   render() {
@@ -24,25 +25,31 @@ export default class Month extends React.Component {
     }
 
     return (
-      <table className="table">
-        <thead>
-        <tr>
-          {shortWeekDays().map((weekDay, key) =>
-            <th key={key}>{weekDay}</th>
-          )}
-        </tr>
-        </thead>
-
-        <tbody>
-        {weeks.map((week, weekKey) =>
-          <tr key={weekKey}>
-            {week.map((day, dayKey) =>
-              <td key={dayKey} className="has-text-centered">{day === -1 ? '' : day}</td>
+      <div>
+        <h2 className="subtitle">{monthNames()[this.props.month]}</h2>
+        <table className="table is-fullwidth is-narrow">
+          <thead>
+          <tr>
+            {shortWeekDays().map((weekDay, key) =>
+              <th key={key} className="has-text-centered">{weekDay}</th>
             )}
           </tr>
-        )}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+          {weeks.map((week, weekKey) =>
+            <tr key={weekKey}>
+              {week.map((day, dayKey) =>
+                <Day key={dayKey}
+                     day={day}
+                     daySelected={this.props.selectedDays.indexOf(day) !== -1}
+                     onDaySelected={(e, day) => this.props.onDaySelected(e, day, this.props.month)}/>
+              )}
+            </tr>
+          )}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }

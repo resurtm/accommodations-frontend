@@ -8,19 +8,28 @@ export default class Calendar extends React.Component {
       _.range((i - 1) * 3 + 1, (i - 1) * 3 + 4)
     );
 
+    const selectedDays = {};
+    _.forEach(this.props.selectedDays, ([month, day]) => {
+      if (!(month in selectedDays)) {
+        selectedDays[month] = [];
+      }
+      selectedDays[month].push(day);
+    });
+
     return (
       <div id="calendar">
-
         {months.map((group, groupIndex) =>
           <div key={groupIndex} className="columns">
             {group.map((month, monthIndex) =>
               <div key={monthIndex} className="column is-one-third">
-                <Month month={month} year={this.props.year}/>
+                <Month month={month}
+                       year={this.props.year}
+                       selectedDays={month in selectedDays ? selectedDays[month] : []}
+                       onDaySelected={this.props.onDaySelected}/>
               </div>
             )}
           </div>
         )}
-
       </div>
     );
   }

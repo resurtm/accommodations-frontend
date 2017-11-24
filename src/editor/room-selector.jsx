@@ -8,7 +8,6 @@ export default class RoomSelector extends React.Component {
         <div className="control">
           <div className="select is-info is-fullwidth">
             <select>
-              <option value=""/>
               <option value="room-type-1">Room Type #1</option>
               <option value="room-type-2">Room Type #2</option>
               <option value="room-type-3">Room Type #3</option>

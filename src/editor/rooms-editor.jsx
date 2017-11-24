@@ -9,13 +9,60 @@ export default class RoomsEditor extends React.Component {
 
     this.state = {
       activeYear: new Date().getFullYear(),
+      selectedDays: [],
+      lastSelectedDay: null,
     };
 
     this.handleActiveYearChanged = this.handleActiveYearChanged.bind(this);
+    this.handleOnDaySelected = this.handleOnDaySelected.bind(this);
   }
 
   handleActiveYearChanged(activeYear) {
-    this.setState({activeYear});
+    this.setState({
+      activeYear,
+      selectedDays: [],
+      lastSelectedDay: null,
+    });
+  }
+
+  handleOnDaySelected(e, day, month) {
+    const shiftKey = e.shiftKey;
+    this.setState(prevState => {
+      if (!shiftKey || prevState.lastSelectedDay === null) {
+        return {
+          selectedDays: [[month, day]],
+          lastSelectedDay: [month, day],
+        };
+      }
+
+      const [prevMonth, prevDay] = prevState.lastSelectedDay;
+      const selectedDays = [];
+
+      if (prevMonth === month) {
+        for (let i = prevDay; i <= day; i++) {
+          selectedDays.push([month, i]);
+        }
+      } else {
+        for (let i = prevDay; i <= 31; i++) {
+          selectedDays.push([prevMonth, i]);
+        }
+        if (Math.abs(prevMonth - month) > 1) {
+          for (let i = prevMonth + 1; i <= month - 1; i++) {
+            for (let j = 1; j <= 31; j++) {
+              selectedDays.push([i, j]);
+            }
+          }
+        }
+        for (let i = 1; i <= day; i++) {
+          selectedDays.push([month, i]);
+        }
+      }
+
+      return {
+        selectedDays: selectedDays,
+        lastSelectedDay: [month, day],
+      };
+    });
   }
 
   render() {
@@ -28,11 +75,14 @@ export default class RoomsEditor extends React.Component {
               <RoomSelector/>
             </div>
             <div className="column">
-              <YearSelector year={this.state.activeYear} onYearChanged={this.handleActiveYearChanged}/>
+              <YearSelector year={this.state.activeYear}
+                            onYearChanged={this.handleActiveYearChanged}/>
             </div>
           </div>
 
-          <Calendar year={this.state.activeYear}/>
+          <Calendar year={this.state.activeYear}
+                    selectedDays={this.state.selectedDays}
+                    onDaySelected={this.handleOnDaySelected}/>
 
         </div>
         <div className="column">

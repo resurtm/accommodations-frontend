@@ -10,3 +10,8 @@ export function weekDay(day, month, year) {
 export function shortWeekDays() {
   return ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 }
+
+export function monthNames() {
+  return ['', 'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'];
+}
