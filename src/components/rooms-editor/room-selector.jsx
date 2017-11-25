@@ -2,18 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class RoomSelector extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleRoomChanged = this.handleRoomChanged.bind(this);
+  }
+
+  handleRoomChanged(e) {
+    const id = parseInt(e.target.value, 10);
+    this.props.onRoomChanged(isNaN(id) ? 0 : id);
+  }
+
   render() {
     return (
       <div className="field">
         <label className="label">Select Room:</label>
         <div className="control">
           <div className="select is-info is-fullwidth">
-            <select value={this.props.room}
-                    onChange={(e) => this.props.onRoomChanged(e.target.value)}>
+            <select value={this.props.activeRoom}
+                    onChange={this.handleRoomChanged}>
               <option value=""/>
-              <option value="room-type-1">Room Type #1</option>
-              <option value="room-type-2">Room Type #2</option>
-              <option value="room-type-3">Room Type #3</option>
+              {this.props.rooms.map(room => (
+                <option key={room.id} value={room.id}>{room.name}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -23,6 +33,10 @@ export default class RoomSelector extends React.Component {
 }
 
 RoomSelector.propTypes = {
-  room: PropTypes.string.isRequired,
+  activeRoom: PropTypes.number.isRequired,
+  rooms: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  })).isRequired,
   onRoomChanged: PropTypes.func.isRequired,
 };

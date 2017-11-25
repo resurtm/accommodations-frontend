@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import NonSelectedRoomNotice from './non-selected-room-notice';
 import CalendarMonth from './calendar-month';
 import {typedArrayOfLength} from 'tools/propTypes';
 
@@ -19,14 +20,16 @@ export default class Calendar extends React.Component {
       selectedDays[month].push(day);
     });
 
-    return (
+    return this.props.activeRoom === 0 || !this.props.activeRoom ? (
+      <NonSelectedRoomNotice/>
+    ) : (
       <Container onClick={() => this.props.onCalendarClick()}>
         {monthGroups.map((monthGroup, key) => (
           <div key={key} className="columns">
             {monthGroup.map(month => (
               <div key={month} className="column is-one-third">
                 <CalendarMonth month={month}
-                               year={this.props.year}
+                               year={this.props.activeYear}
                                selectedDays={selectedDays[month]}
                                onDaySelected={this.props.onDaySelected}/>
               </div>
@@ -39,7 +42,8 @@ export default class Calendar extends React.Component {
 }
 
 Calendar.propTypes = {
-  year: PropTypes.number.isRequired,
+  activeRoom: PropTypes.number.isRequired,
+  activeYear: PropTypes.number.isRequired,
   selectedDays: PropTypes.arrayOf(typedArrayOfLength.bind(null, 'number', 2)).isRequired,
   onDaySelected: PropTypes.func.isRequired,
   onCalendarClick: PropTypes.func.isRequired,

@@ -4,7 +4,8 @@ import Calendar from 'components/rooms-editor/calendar';
 
 const mapStateToProps = state => {
   return {
-    year: state.roomsEditor.activeYear,
+    activeRoom: state.roomsEditor.activeRoom,
+    activeYear: state.roomsEditor.activeYear,
     selectedDays: state.roomsEditor.selectedDays,
   };
 };

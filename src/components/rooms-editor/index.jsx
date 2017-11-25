@@ -8,6 +8,10 @@ import CalendarSelector from 'containers/rooms-editor/calendar-selector';
 import SpotsSpecsEditor from 'containers/rooms-editor/spots-specs-editor';
 
 export default class RoomsEditor extends React.Component {
+  componentWillMount() {
+    this.props.loadRooms();
+  }
+
   render() {
     return (
       <MainWrapper>
@@ -34,11 +38,8 @@ export default class RoomsEditor extends React.Component {
 }
 
 RoomsEditor.propTypes = {
-  isLoading: PropTypes.bool,
-};
-
-RoomsEditor.defaultProps = {
-  isLoading: false,
+  isLoading: PropTypes.bool.isRequired,
+  loadRooms: PropTypes.func.isRequired,
 };
 
 const MainWrapper = styled.div`

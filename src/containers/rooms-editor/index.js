@@ -1,4 +1,5 @@
 import {connect} from 'react-redux';
+import {loadRooms} from 'actions/rooms-editor';
 import BaseRoomsEditor from 'components/rooms-editor';
 
 const mapStateToProps = state => {
@@ -8,7 +9,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    loadRooms: () => {
+      dispatch(loadRooms());
+    },
+  };
 };
 
 const RoomsEditor = connect(

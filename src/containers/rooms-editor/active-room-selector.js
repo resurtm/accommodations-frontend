@@ -4,7 +4,8 @@ import RoomSelector from 'components/rooms-editor/room-selector';
 
 const mapStateToProps = state => {
   return {
-    room: state.roomsEditor.activeRoom,
+    activeRoom: state.roomsEditor.activeRoom,
+    rooms: state.roomsEditor.rooms,
   };
 };
 
