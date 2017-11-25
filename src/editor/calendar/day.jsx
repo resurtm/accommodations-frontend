@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export default class Month extends React.Component {
+export default class Day extends React.Component {
   render() {
     return this.props.day === -1 ? (
       <td className="has-text-centered">
@@ -16,6 +17,12 @@ export default class Month extends React.Component {
     );
   }
 }
+
+Day.propTypes = {
+  day: PropTypes.number.isRequired,
+  daySelected: PropTypes.bool.isRequired,
+  onDaySelected: PropTypes.func.isRequired,
+};
 
 const Td = styled.td`
   cursor: pointer;

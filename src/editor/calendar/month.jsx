@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Day from 'editor/calendar/day';
-import {daysInMonth, shortWeekDays, weekDay, monthNames} from 'tools';
+import {daysInMonth, monthNames, shortWeekDays, weekDay} from 'tools/dateTime';
 
 export default class Month extends React.Component {
   render() {
@@ -53,3 +54,10 @@ export default class Month extends React.Component {
     );
   }
 }
+
+Month.propTypes = {
+  month: PropTypes.number.isRequired,
+  year: PropTypes.number.isRequired,
+  selectedDays: PropTypes.arrayOf(PropTypes.number).isRequired,
+  onDaySelected: PropTypes.func.isRequired,
+};

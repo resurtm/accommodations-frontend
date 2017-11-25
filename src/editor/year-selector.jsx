@@ -1,5 +1,6 @@
-import React from 'react';
 import _ from 'lodash';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class YearSelector extends React.Component {
   render() {
@@ -25,3 +26,7 @@ export default class YearSelector extends React.Component {
     );
   }
 }
+
+YearSelector.propTypes = {
+  year: PropTypes.number.isRequired,
+};

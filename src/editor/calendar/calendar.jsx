@@ -1,7 +1,9 @@
 import _ from 'lodash';
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Month from 'editor/calendar/month';
+import {typedArrayOfLength} from 'tools/propTypes';
 
 export default class Calendar extends React.Component {
   render() {
@@ -35,6 +37,13 @@ export default class Calendar extends React.Component {
     );
   }
 }
+
+Calendar.propTypes = {
+  year: PropTypes.number.isRequired,
+  selectedDays: PropTypes.arrayOf(typedArrayOfLength.bind(null, 'number', 2)).isRequired,
+  onDaySelected: PropTypes.func.isRequired,
+  onCalendarClick: PropTypes.func.isRequired,
+};
 
 const Container = styled.div`
   user-select: none;

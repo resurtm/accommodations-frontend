@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 export default class SpotsEditor extends React.Component {
@@ -48,6 +49,10 @@ export default class SpotsEditor extends React.Component {
     );
   }
 }
+
+SpotsEditor.propTypes = {
+  hasSelectedDays: PropTypes.bool.isRequired,
+};
 
 const Field = styled.div`
   margin-bottom: 30px;
