@@ -7,6 +7,7 @@ import {
   SET_ACTIVE_YEAR,
   SET_LOADING,
   SET_ROOMS,
+  SET_SPOTS,
 } from 'actions/rooms-editor';
 
 const selectDaysRange = ([startMonth, startDay], [endMonth, endDay]) => {
@@ -57,16 +58,12 @@ const roomsEditor = (state = {
   activeRoom: 0,
   activeYear: new Date().getFullYear(),
   selectedDays: [],
+  spots: new Map(),
 }, action) => {
   switch (action.type) {
     case SET_LOADING:
       return Immutable.merge(state, {
         isLoading: action.isLoading,
-      });
-
-    case SET_ROOMS:
-      return Immutable.merge(state, {
-        rooms: action.rooms,
       });
 
     case SET_ACTIVE_ROOM:
@@ -80,6 +77,21 @@ const roomsEditor = (state = {
         activeYear: action.year,
         selectedDays: [],
       });
+
+    case SET_ROOMS:
+      return Immutable.merge(state, {
+        rooms: action.rooms,
+      });
+
+    case SET_SPOTS:
+      // todo: fixme: seamless-immutable does not work here
+      // return Immutable.merge(state, {
+      //   spots: action.spots,
+      // });
+      return {
+        ...state,
+        spots: action.spots,
+      };
 
     case SELECT_DAY:
     case SELECT_DAY_RANGE:

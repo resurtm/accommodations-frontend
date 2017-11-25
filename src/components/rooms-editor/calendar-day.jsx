@@ -19,6 +19,8 @@ export default class CalendarDay extends React.Component {
       : (
         <Td className="has-text-centered"
             selected={this.props.selected}
+            opened={this.props.spot.status === 'open'}
+            closed={this.props.spot.status === 'close'}
             onClick={this.handleClick}>
           {this.props.day}
         </Td>
@@ -29,12 +31,22 @@ export default class CalendarDay extends React.Component {
 CalendarDay.propTypes = {
   day: PropTypes.number.isRequired,
   selected: PropTypes.bool.isRequired,
+  spot: PropTypes.shape({
+    status: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+  }),
   onDaySelected: PropTypes.func.isRequired,
 };
 
 const Td = styled.td`
   cursor: pointer;
   color: ${p => p.selected ? 'white' : 'inherit'};
-  background: ${p => p.selected ? 'lightcoral' : 'none'};
-  font-weight: ${p => p.selected ? 'bold' : 'normal'};
+  font-weight: ${p => p.opened || p.closed || p.selected ? 'bold' : 'normal'};
+  background: ${p => ({
+    [true]: 'none',
+    [p.opened]: 'lightgreen',
+    [p.closed]: 'lightblue',
+    [p.selected]: 'lightcoral',
+  }.true)};
 `;

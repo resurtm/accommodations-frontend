@@ -8,9 +8,55 @@ export const setActiveRoom = room => {
   return {type: SET_ACTIVE_ROOM, room};
 };
 
+export const CHANGE_ACTIVE_ROOM = 'CHANGE_ACTIVE_ROOM';
+export const changeActiveRoom = room => (dispatch, getState) => {
+  dispatch(setActiveRoom(room));
+  dispatch(setSpots(new Map()));
+  if (room === 0 || !room) {
+    return;
+  }
+  dispatch(setLoading(true));
+  setTimeout(() => {
+    const spots = new Map();
+    spots.set([1, 13], {status: 'open', count: 10, price: 49.95});
+    spots.set([1, 14], {status: 'open', count: 10, price: 49.95});
+    spots.set([1, 15], {status: 'open', count: 10, price: 49.95});
+    spots.set([2, 4], {status: 'close', count: 15, price: 29.95});
+    spots.set([2, 5], {status: 'close', count: 15, price: 29.95});
+    spots.set([2, 6], {status: 'close', count: 15, price: 29.95});
+    spots.set([2, 7], {status: 'close', count: 15, price: 29.95});
+    dispatch(setSpots(spots));
+    dispatch(setLoading(false));
+  }, 1000);
+};
+
+export const CHANGE_ACTIVE_YEAR = 'CHANGE_ACTIVE_YEAR';
+export const changeActiveYear = year => (dispatch, getState) => {
+  dispatch(setActiveYear(year));
+  dispatch(setSpots(new Map()));
+  dispatch(setLoading(true));
+  setTimeout(() => {
+    const spots = new Map();
+    spots.set([1, 13], {status: 'open', count: 10, price: 49.95});
+    spots.set([1, 14], {status: 'open', count: 10, price: 49.95});
+    spots.set([1, 15], {status: 'open', count: 10, price: 49.95});
+    spots.set([2, 4], {status: 'close', count: 15, price: 29.95});
+    spots.set([2, 5], {status: 'close', count: 15, price: 29.95});
+    spots.set([2, 6], {status: 'close', count: 15, price: 29.95});
+    spots.set([2, 7], {status: 'close', count: 15, price: 29.95});
+    dispatch(setSpots(spots));
+    dispatch(setLoading(false));
+  }, 1000);
+};
+
 export const SET_ROOMS = 'SET_ROOMS';
 export const setRooms = rooms => {
   return {type: SET_ROOMS, rooms};
+};
+
+export const SET_ACTIVE_YEAR = 'SET_ACTIVE_YEAR';
+export const setActiveYear = year => {
+  return {type: SET_ACTIVE_YEAR, year};
 };
 
 export const LOAD_ROOMS = 'LOAD_ROOMS';
@@ -24,12 +70,12 @@ export const loadRooms = () => dispatch => {
       {id: 123126, name: 'Luxury Room'},
     ]));
     dispatch(setLoading(false));
-  }, 2000);
+  }, 1000);
 };
 
-export const SET_ACTIVE_YEAR = 'SET_ACTIVE_YEAR';
-export const setActiveYear = year => {
-  return {type: SET_ACTIVE_YEAR, year};
+export const SET_SPOTS = 'SET_SPOTS';
+export const setSpots = spots => {
+  return {type: SET_SPOTS, spots};
 };
 
 export const SELECT_DAY = 'SELECT_DAY';

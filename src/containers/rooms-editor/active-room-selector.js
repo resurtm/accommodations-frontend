@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {setActiveRoom} from 'actions/rooms-editor';
+import {changeActiveRoom} from 'actions/rooms-editor';
 import RoomSelector from 'components/rooms-editor/room-selector';
 
 const mapStateToProps = state => {
@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onRoomChanged: room => {
-      dispatch(setActiveRoom(room));
+      dispatch(changeActiveRoom(room));
     },
   };
 };

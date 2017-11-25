@@ -35,6 +35,8 @@ export default class CalendarMonth extends React.Component {
       weeks.push(week);
     }
 
+    const nullSpot = {status: '', count: 0, price: 0.0};
+
     return (
       <div>
         <h2 className="subtitle">{name}</h2>
@@ -53,6 +55,7 @@ export default class CalendarMonth extends React.Component {
                 <CalendarDay key={dayIndex}
                              day={day}
                              selected={this.props.selectedDays.indexOf(day) !== -1}
+                             spot={day in this.props.spots ? this.props.spots[day] : nullSpot}
                              onDaySelected={this.handleDaySelected}/>
               )}
             </tr>
@@ -68,5 +71,10 @@ CalendarMonth.propTypes = {
   month: PropTypes.number.isRequired,
   year: PropTypes.number.isRequired,
   selectedDays: PropTypes.arrayOf(PropTypes.number).isRequired,
+  spots: PropTypes.objectOf(PropTypes.shape({
+    status: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+  })).isRequired,
   onDaySelected: PropTypes.func.isRequired,
 };

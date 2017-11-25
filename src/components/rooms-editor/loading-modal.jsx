@@ -19,12 +19,12 @@ LoadingModal.propTypes = {
 
 const Div = styled.div`
   width: 300px;
-  height: 300px;
+  height: 200px;
 
   position: absolute;
   left: 50%;
   top: 200px;
-  margin-top: -150px;
+  margin-top: -100px;
   margin-left: -150px;
 
   background: white;

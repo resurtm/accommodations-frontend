@@ -12,12 +12,16 @@ export default class Calendar extends React.Component {
       _.range((i - 1) * 3 + 1, (i - 1) * 3 + 4)
     ));
 
-    const selectedDays = {};
+    const selectedDays = {}, spots = {};
     _.forEach(_.range(1, 12 + 1), month => {
       selectedDays[month] = [];
+      spots[month] = {};
     });
     _.forEach(this.props.selectedDays, ([month, day]) => {
       selectedDays[month].push(day);
+    });
+    this.props.spots.forEach((value, key) => {
+      spots[key[0]][key[1]] = value;
     });
 
     return this.props.activeRoom === 0 || !this.props.activeRoom ? (
@@ -31,6 +35,7 @@ export default class Calendar extends React.Component {
                 <CalendarMonth month={month}
                                year={this.props.activeYear}
                                selectedDays={selectedDays[month]}
+                               spots={spots[month]}
                                onDaySelected={this.props.onDaySelected}/>
               </div>
             ))}
@@ -45,6 +50,7 @@ Calendar.propTypes = {
   activeRoom: PropTypes.number.isRequired,
   activeYear: PropTypes.number.isRequired,
   selectedDays: PropTypes.arrayOf(typedArrayOfLength.bind(null, 'number', 2)).isRequired,
+  spots: PropTypes.instanceOf(Map).isRequired,
   onDaySelected: PropTypes.func.isRequired,
   onCalendarClick: PropTypes.func.isRequired,
 };

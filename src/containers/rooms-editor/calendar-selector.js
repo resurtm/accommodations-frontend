@@ -7,6 +7,7 @@ const mapStateToProps = state => {
     activeRoom: state.roomsEditor.activeRoom,
     activeYear: state.roomsEditor.activeYear,
     selectedDays: state.roomsEditor.selectedDays,
+    spots: state.roomsEditor.spots,
   };
 };
 
