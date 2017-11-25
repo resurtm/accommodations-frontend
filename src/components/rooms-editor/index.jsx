@@ -2,7 +2,7 @@ import React from 'react';
 import ActiveRoomSelector from 'containers/rooms-editor/active-room-selector';
 import ActiveYearSelector from 'containers/rooms-editor/active-year-selector';
 import CalendarSelector from 'containers/rooms-editor/calendar-selector';
-import SpotsSpecsForm from './spots-specs-form';
+import SpotsSpecsEditor from 'containers/rooms-editor/spots-specs-editor';
 
 export default class RoomsEditor extends React.Component {
   render() {
@@ -20,7 +20,7 @@ export default class RoomsEditor extends React.Component {
           <CalendarSelector/>
         </div>
         <div className="column">
-          <SpotsSpecsForm hasSelectedDays={true}/>
+          <SpotsSpecsEditor/>
         </div>
       </div>
     );
