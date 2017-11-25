@@ -1,3 +1,5 @@
+import Immutable from 'seamless-immutable';
+
 const defaultState = {
   activeRoom: '',
   activeYear: new Date().getFullYear(),
@@ -31,42 +33,29 @@ const selectDayRange = ([startMonth, startDay], [endMonth, endDay]) => {
 const roomsEditor = (state = defaultState, action) => {
   switch (action.type) {
     case 'SET_ACTIVE_ROOM':
-      return {
-        ...state,
-        activeRoom: action.room,
-      };
+      return Immutable.merge(state, {activeRoom: action.room});
 
     case 'SET_ACTIVE_YEAR':
-      return {
-        ...state,
-        activeYear: action.year,
-      };
+      return Immutable.merge(state, {activeYear: action.year});
 
     case 'SELECT_DAY':
-      return {
-        ...state,
+      return Immutable.merge(state, {
         selectedDays: [[action.month, action.day]],
-      };
+      });
 
     case 'SELECT_DAY_RANGE':
-      return {
-        ...state,
+      return Immutable.merge(state, {
         selectedDays:
           state.selectedDays.length === 0
             ? [[action.month, action.day]]
             : selectDayRange(state.selectedDays[state.selectedDays.length - 1], [action.month, action.day]),
-      };
+      });
 
     case 'DESELECT_DAYS':
-      return {
-        ...state,
-        selectedDays: [],
-      };
+      return Immutable.merge(state, {selectedDays: []});
 
     default:
-      return {
-        ...state,
-      };
+      return state;
   }
 };
 
