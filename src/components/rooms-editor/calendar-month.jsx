@@ -1,10 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Day from 'editor/calendar/day';
+import CalendarDay from './calendar-day';
 import {daysInMonth, monthNames, shortWeekDays, weekDay} from 'tools/dateTime';
 
-export default class Month extends React.Component {
+export default class CalendarMonth extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleDaySelected = this.handleDaySelected.bind(this);
+  }
+
+  handleDaySelected(isRange, day) {
+    this.props.onDaySelected(isRange, this.props.month, day);
+  }
+
   render() {
+    const name = monthNames()[this.props.month];
     const count = daysInMonth(this.props.month, this.props.year);
     const day = weekDay(1, this.props.month, this.props.year);
 
@@ -27,24 +37,23 @@ export default class Month extends React.Component {
 
     return (
       <div>
-        <h2 className="subtitle">{monthNames()[this.props.month]}</h2>
+        <h2 className="subtitle">{name}</h2>
         <table className="table is-fullwidth is-narrow">
           <thead>
           <tr>
-            {shortWeekDays().map((weekDay, key) =>
-              <th key={key} className="has-text-centered">{weekDay}</th>
+            {shortWeekDays().map(weekDay =>
+              <th key={weekDay} className="has-text-centered">{weekDay}</th>
             )}
           </tr>
           </thead>
-
           <tbody>
-          {weeks.map((week, weekKey) =>
-            <tr key={weekKey}>
-              {week.map((day, dayKey) =>
-                <Day key={dayKey}
-                     day={day}
-                     daySelected={this.props.selectedDays.indexOf(day) !== -1}
-                     onDaySelected={(e, day) => this.props.onDaySelected(e, day, this.props.month)}/>
+          {weeks.map((week, weekIndex) =>
+            <tr key={weekIndex}>
+              {week.map((day, dayIndex) =>
+                <CalendarDay key={dayIndex}
+                             day={day}
+                             selected={this.props.selectedDays.indexOf(day) !== -1}
+                             onDaySelected={this.handleDaySelected}/>
               )}
             </tr>
           )}
@@ -55,7 +64,7 @@ export default class Month extends React.Component {
   }
 }
 
-Month.propTypes = {
+CalendarMonth.propTypes = {
   month: PropTypes.number.isRequired,
   year: PropTypes.number.isRequired,
   selectedDays: PropTypes.arrayOf(PropTypes.number).isRequired,
