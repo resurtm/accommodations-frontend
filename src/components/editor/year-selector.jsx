@@ -9,7 +9,7 @@ export default class YearSelector extends React.Component {
 
     return (
       <div className="field">
-        <label className="label">Select Room:</label>
+        <label className="label">Select Year:</label>
         <div className="control">
           <div className="field is-grouped">
             {years.map(year =>
@@ -29,4 +29,5 @@ export default class YearSelector extends React.Component {
 
 YearSelector.propTypes = {
   year: PropTypes.number.isRequired,
+  onYearChanged: PropTypes.func.isRequired,
 };
