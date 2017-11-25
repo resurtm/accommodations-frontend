@@ -8,13 +8,7 @@ export const setActiveRoom = room => {
   return {type: SET_ACTIVE_ROOM, room};
 };
 
-export const CHANGE_ACTIVE_ROOM = 'CHANGE_ACTIVE_ROOM';
-export const changeActiveRoom = room => (dispatch, getState) => {
-  dispatch(setActiveRoom(room));
-  dispatch(setSpots(new Map()));
-  if (room === 0 || !room) {
-    return;
-  }
+const loadSpots = (dispatch, getState) => {
   dispatch(setLoading(true));
   setTimeout(() => {
     const spots = new Map();
@@ -30,23 +24,21 @@ export const changeActiveRoom = room => (dispatch, getState) => {
   }, 1000);
 };
 
+export const CHANGE_ACTIVE_ROOM = 'CHANGE_ACTIVE_ROOM';
+export const changeActiveRoom = room => (dispatch, getState) => {
+  dispatch(setActiveRoom(room));
+  dispatch(setSpots(new Map()));
+  if (room === 0 || !room) {
+    return;
+  }
+  loadSpots(dispatch, getState);
+};
+
 export const CHANGE_ACTIVE_YEAR = 'CHANGE_ACTIVE_YEAR';
 export const changeActiveYear = year => (dispatch, getState) => {
   dispatch(setActiveYear(year));
   dispatch(setSpots(new Map()));
-  dispatch(setLoading(true));
-  setTimeout(() => {
-    const spots = new Map();
-    spots.set([1, 13], {status: 'open', count: 10, price: 49.95});
-    spots.set([1, 14], {status: 'open', count: 10, price: 49.95});
-    spots.set([1, 15], {status: 'open', count: 10, price: 49.95});
-    spots.set([2, 4], {status: 'close', count: 15, price: 29.95});
-    spots.set([2, 5], {status: 'close', count: 15, price: 29.95});
-    spots.set([2, 6], {status: 'close', count: 15, price: 29.95});
-    spots.set([2, 7], {status: 'close', count: 15, price: 29.95});
-    dispatch(setSpots(spots));
-    dispatch(setLoading(false));
-  }, 1000);
+  loadSpots(dispatch, getState);
 };
 
 export const SET_ROOMS = 'SET_ROOMS';
