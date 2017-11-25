@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import 'style.scss';
+import 'bulma/bulma.sass'
 import MainLayout from 'layout/main-layout';
 import RoomsEditor from 'editor/rooms-editor';
 

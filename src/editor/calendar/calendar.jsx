@@ -1,5 +1,6 @@
-import React from 'react';
 import _ from 'lodash';
+import React from 'react';
+import styled from 'styled-components';
 import Month from 'editor/calendar/month';
 
 export default class Calendar extends React.Component {
@@ -17,7 +18,7 @@ export default class Calendar extends React.Component {
     });
 
     return (
-      <div id="calendar" onClick={this.props.onCalendarClick}>
+      <Container onClick={this.props.onCalendarClick}>
         {months.map((group, groupIndex) =>
           <div key={groupIndex} className="columns">
             {group.map((month, monthIndex) =>
@@ -30,7 +31,11 @@ export default class Calendar extends React.Component {
             )}
           </div>
         )}
-      </div>
+      </Container>
     );
   }
 }
+
+const Container = styled.div`
+  user-select: none;
+`;

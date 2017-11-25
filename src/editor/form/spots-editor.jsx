@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 export default class SpotsEditor extends React.Component {
   render() {
@@ -8,7 +9,7 @@ export default class SpotsEditor extends React.Component {
 
     return (
       <div id="spots-editor">
-        <div className="field">
+        <Field className="field">
           <label className="label">Spots Status:</label>
           <div className="control">
             <div className="select is-fullwidth">
@@ -19,31 +20,35 @@ export default class SpotsEditor extends React.Component {
               </select>
             </div>
           </div>
-        </div>
+        </Field>
 
-        <div className="field">
+        <Field className="field">
           <label className="label">Spots Available:</label>
           <div className="control">
             <input className="input" type="number" placeholder="Spots Available"/>
           </div>
-        </div>
+        </Field>
 
-        <div className="field">
+        <Field className="field">
           <label className="label">Price per Spot:</label>
           <div className="control">
             <input className="input" type="number" placeholder="Price per Spot"/>
           </div>
-        </div>
+        </Field>
 
-        <div className="field is-grouped">
+        <Field className="field is-grouped">
           <div className="control">
             <button className="button is-info">Apply</button>
           </div>
           <div className="control">
             <button className="button is-text">Cancel</button>
           </div>
-        </div>
+        </Field>
       </div>
     );
   }
 }
+
+const Field = styled.div`
+  margin-bottom: 30px;
+`;

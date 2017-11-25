@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 export default class Month extends React.Component {
   render() {
@@ -7,12 +8,18 @@ export default class Month extends React.Component {
         &nbsp;
       </td>
     ) : (
-      <td className={this.props.daySelected
-        ? 'selected-day standard-day has-text-centered'
-        : 'standard-day has-text-centered'}
+      <Td className="has-text-centered"
+          selected={this.props.daySelected}
           onClick={e => this.props.onDaySelected(e, this.props.day)}>
         {this.props.day}
-      </td>
+      </Td>
     );
   }
 }
+
+const Td = styled.td`
+  cursor: pointer;
+  color: ${p => p.selected ? 'white' : 'inherit'};
+  background: ${p => p.selected ? 'lightcoral' : 'none'};
+  font-weight: ${p => p.selected ? 'bold' : 'normal'};
+`;
