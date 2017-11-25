@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import roomsEditor from 'reducers/rooms-editor';
+import roomsEditor from './rooms-editor';
 
 const reTicketsApp = combineReducers({
   roomsEditor,
