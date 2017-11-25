@@ -88,10 +88,7 @@ const roomsEditor = (state = {
       // return Immutable.merge(state, {
       //   spots: action.spots,
       // });
-      return {
-        ...state,
-        spots: action.spots,
-      };
+      return {...state, spots: action.spots};
 
     case SELECT_DAY:
     case SELECT_DAY_RANGE:

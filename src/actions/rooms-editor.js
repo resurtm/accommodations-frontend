@@ -24,7 +24,6 @@ const loadSpots = (dispatch, getState) => {
   }, 1000);
 };
 
-export const CHANGE_ACTIVE_ROOM = 'CHANGE_ACTIVE_ROOM';
 export const changeActiveRoom = room => (dispatch, getState) => {
   dispatch(setActiveRoom(room));
   dispatch(setSpots(new Map()));
@@ -34,7 +33,6 @@ export const changeActiveRoom = room => (dispatch, getState) => {
   loadSpots(dispatch, getState);
 };
 
-export const CHANGE_ACTIVE_YEAR = 'CHANGE_ACTIVE_YEAR';
 export const changeActiveYear = year => (dispatch, getState) => {
   dispatch(setActiveYear(year));
   dispatch(setSpots(new Map()));
@@ -51,7 +49,6 @@ export const setActiveYear = year => {
   return {type: SET_ACTIVE_YEAR, year};
 };
 
-export const LOAD_ROOMS = 'LOAD_ROOMS';
 export const loadRooms = () => dispatch => {
   dispatch(setLoading(true));
   setTimeout(() => {
