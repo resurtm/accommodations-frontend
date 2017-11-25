@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {setActiveYear} from 'actions/rooms-editor';
-import YearSelector from 'components/editor/year-selector';
+import YearSelector from 'components/rooms-editor/year-selector';
 
 const mapStateToProps = state => {
   return {

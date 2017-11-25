@@ -1,5 +1,5 @@
 const defaultState = {
-  activeRoom: null,
+  activeRoom: '',
   activeYear: new Date().getFullYear(),
   selectedDays: [],
 };

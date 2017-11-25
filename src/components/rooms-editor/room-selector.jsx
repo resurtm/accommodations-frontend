@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class RoomSelector extends React.Component {
   render() {
@@ -7,7 +8,9 @@ export default class RoomSelector extends React.Component {
         <label className="label">Select Room:</label>
         <div className="control">
           <div className="select is-info is-fullwidth">
-            <select>
+            <select value={this.props.room}
+                    onChange={(e) => this.props.onRoomChanged(e.target.value)}>
+              <option value=""/>
               <option value="room-type-1">Room Type #1</option>
               <option value="room-type-2">Room Type #2</option>
               <option value="room-type-3">Room Type #3</option>
@@ -18,3 +21,8 @@ export default class RoomSelector extends React.Component {
     );
   }
 }
+
+RoomSelector.propTypes = {
+  room: PropTypes.string.isRequired,
+  onRoomChanged: PropTypes.func.isRequired,
+};

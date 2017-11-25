@@ -1,5 +1,6 @@
 import React from 'react';
-import ActiveYearSelector from 'containers/editor/active-year-selector';
+import ActiveRoomSelector from 'containers/rooms-editor/active-room-selector';
+import ActiveYearSelector from 'containers/rooms-editor/active-year-selector';
 
 export default class RoomsEditor extends React.Component {
   render() {
@@ -9,7 +10,7 @@ export default class RoomsEditor extends React.Component {
 
           <div className="columns">
             <div className="column is-two-fifths">
-              RoomSelector
+              <ActiveRoomSelector/>
             </div>
             <div className="column">
               <ActiveYearSelector/>

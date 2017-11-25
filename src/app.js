@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import 'bulma/bulma.sass'
 import reTicketsApp from 'reducers';
 import MainLayout from 'components/layout/main-layout';
-import RoomsEditor from 'components/editor/rooms-editor';
+import RoomsEditor from 'components/rooms-editor/rooms-editor';
 
 const store = createStore(
   reTicketsApp,
