@@ -1,5 +1,6 @@
 import Immutable from 'seamless-immutable';
 import _ from 'lodash';
+import {fetchRooms, fetchSpots, submitSpots} from 'tools/api';
 
 export const SET_LOADING = 'SET_LOADING';
 export const setLoading = isLoading => {
@@ -7,66 +8,39 @@ export const setLoading = isLoading => {
 };
 
 export const SET_ACTIVE_ROOM = 'SET_ACTIVE_ROOM';
-export const setActiveRoom = room => {
-  return Immutable({type: SET_ACTIVE_ROOM, room});
-};
-
-const loadSpots = (dispatch, getState) => {
-  dispatch(setLoading(true));
-  // todo: fixme: get the real data from the server api
-  setTimeout(() => {
-    dispatch(setSpots(Immutable({
-      '1.13': {status: 'open', count: 10, price: 49.95},
-      '1.14': {status: 'open', count: 10, price: 49.95},
-      '1.15': {status: 'open', count: 10, price: 49.95},
-      '1.16': {status: 'open', count: 10, price: 49.95},
-      '2.4': {status: 'close', count: 5, price: 29.95},
-      '2.5': {status: 'close', count: 5, price: 29.95},
-      '2.6': {status: 'close', count: 5, price: 29.95},
-      '2.7': {status: 'close', count: 5, price: 29.95},
-      '2.8': {status: 'close', count: 5, price: 29.95},
-    })));
-    dispatch(setLoading(false));
-  }, 1000);
-};
-
-export const changeActiveRoom = room => (dispatch, getState) => {
-  dispatch(setActiveRoom(room));
-  dispatch(setSpots(new Map()));
+export const setActiveRoom = room => (dispatch, getState) => {
+  dispatch(Immutable({type: SET_ACTIVE_ROOM, room}));
+  dispatch(setSpots({}));
   if (room === 0 || !room) {
     return;
   }
-  loadSpots(dispatch, getState);
-};
 
-export const changeActiveYear = year => (dispatch, getState) => {
-  dispatch(setActiveYear(year));
-  dispatch(setSpots(new Map()));
-  loadSpots(dispatch, getState);
-};
-
-export const SET_ROOMS = 'SET_ROOMS';
-export const setRooms = rooms => {
-  return Immutable({type: SET_ROOMS, rooms});
+  dispatch(setLoading(true));
+  fetchSpots(room, getState().roomsEditor.year).then(spots => {
+    dispatch(setSpots(spots));
+    dispatch(setLoading(false));
+  });
 };
 
 export const SET_ACTIVE_YEAR = 'SET_ACTIVE_YEAR';
-export const setActiveYear = year => {
-  return Immutable({type: SET_ACTIVE_YEAR, year});
+export const setActiveYear = year => (dispatch, getState) => {
+  dispatch(Immutable({type: SET_ACTIVE_YEAR, year}));
+  dispatch(setSpots({}));
+
+  dispatch(setLoading(true));
+  fetchSpots(getState().roomsEditor.room, year).then(spots => {
+    dispatch(setSpots(spots));
+    dispatch(setLoading(false));
+  });
 };
 
+export const LOAD_ROOMS = 'LOAD_ROOMS';
 export const loadRooms = () => (dispatch, getState) => {
   dispatch(setLoading(true));
-  // todo: fixme: get the real data from the server api
-  setTimeout(() => {
-    dispatch(setRooms(Immutable([
-      {id: 123123, name: 'Room Type #1'},
-      {id: 123124, name: 'Room Type #2'},
-      {id: 123125, name: 'Budget Room'},
-      {id: 123126, name: 'Luxury Room'},
-    ])));
+  fetchRooms().then(rooms => {
+    dispatch(Immutable({type: LOAD_ROOMS, rooms}));
     dispatch(setLoading(false));
-  }, 1000);
+  });
 };
 
 export const SET_SPOTS = 'SET_SPOTS';
@@ -83,12 +57,11 @@ export const applySpots = spotData => (dispatch, getState) => {
     spots[`${month}.${day}`] = spotData;
   });
 
-  // todo: fixme: submit the real data to the server api
-  setTimeout(() => {
+  submitSpots().then(() => {
     dispatch(Immutable({type: APPLY_SPOTS, spots: spots}));
     dispatch(deselectDays());
     dispatch(setLoading(false));
-  }, 1000);
+  });
 };
 
 export const SELECT_DAY = 'SELECT_DAY';

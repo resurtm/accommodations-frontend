@@ -1,18 +1,18 @@
 import {
+  APPLY_SPOTS,
   DESELECT_DAYS,
+  LOAD_ROOMS,
   SELECT_DAY,
   SELECT_DAY_RANGE,
   SELECT_DAYS,
   SET_ACTIVE_ROOM,
   SET_ACTIVE_YEAR,
   SET_LOADING,
-  SET_ROOMS,
   SET_SPOTS,
-  APPLY_SPOTS,
 } from 'actions/rooms-editor';
 import {selectDayRange} from 'tools/days';
 import Immutable from 'seamless-immutable';
-
+import _ from 'lodash';
 
 const spots = (state = {}, action) => {
   switch (action.type) {
@@ -20,7 +20,16 @@ const spots = (state = {}, action) => {
       return Immutable(action.spots);
 
     case APPLY_SPOTS:
-      return Immutable.merge(state, action.spots);
+      let spots = _.merge({}, state, action.spots);
+      _.forEach(spots, (value, key) => {
+        if (value.status === '') {
+          delete spots[key];
+        }
+      });
+      return Immutable.merge(spots);
+
+    default:
+      return state;
   }
 };
 
@@ -73,7 +82,7 @@ const roomsEditor = (state = {
         selectedDays: [],
       });
 
-    case SET_ROOMS:
+    case LOAD_ROOMS:
       return Immutable.merge(state, {
         rooms: action.rooms,
       });

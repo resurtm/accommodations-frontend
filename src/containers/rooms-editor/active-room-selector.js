@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {changeActiveRoom} from 'actions/rooms-editor';
+import {setActiveRoom} from 'actions/rooms-editor';
 import RoomSelector from 'components/rooms-editor/room-selector';
 import Immutable from 'seamless-immutable';
 
@@ -13,7 +13,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return Immutable({
     onRoomChanged: room => {
-      dispatch(changeActiveRoom(room));
+      dispatch(setActiveRoom(room));
     },
   });
 };

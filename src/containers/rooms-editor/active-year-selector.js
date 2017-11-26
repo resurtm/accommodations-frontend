@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {changeActiveYear} from 'actions/rooms-editor';
+import {setActiveYear} from 'actions/rooms-editor';
 import YearSelector from 'components/rooms-editor/year-selector';
 import Immutable from 'seamless-immutable';
 
@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return Immutable({
     onYearChanged: year => {
-      dispatch(changeActiveYear(year));
+      dispatch(setActiveYear(year));
     },
   });
 };
