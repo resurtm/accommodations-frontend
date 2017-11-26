@@ -7,7 +7,6 @@ import {
   SELECT_DAYS,
   SET_ACTIVE_ROOM,
   SET_ACTIVE_YEAR,
-  SET_LOADING,
   SET_SPOTS,
 } from 'actions/rooms-editor';
 import {selectDayRange} from 'tools/days';
@@ -57,7 +56,6 @@ const selectedDays = (state = [], action) => {
 };
 
 const roomsEditor = (state = {
-  isLoading: false,
   rooms: [],
   activeRoom: 0,
   activeYear: new Date().getFullYear(),
@@ -65,11 +63,6 @@ const roomsEditor = (state = {
   spots: {},
 }, action) => {
   switch (action.type) {
-    case SET_LOADING:
-      return Immutable.merge(state, {
-        isLoading: action.isLoading,
-      });
-
     case SET_ACTIVE_ROOM:
       return Immutable.merge(state, {
         activeRoom: action.room,

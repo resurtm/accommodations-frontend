@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import LoadingModal from './loading-modal';
 import ActiveRoomSelector from 'containers/rooms-editor/active-room-selector';
 import ActiveYearSelector from 'containers/rooms-editor/active-year-selector';
 import CalendarSelector from 'containers/rooms-editor/calendar-selector';
@@ -14,8 +13,8 @@ export default class RoomsEditor extends React.Component {
 
   render() {
     return (
-      <MainWrapper>
-        <ColumnsWrapper className="columns" isLoading={this.props.isLoading}>
+      <div>
+        <Columns className="columns" isLoading={this.props.isLoading}>
           <div className="column is-four-fifths">
             <div className="columns">
               <div className="column is-two-fifths">
@@ -30,9 +29,8 @@ export default class RoomsEditor extends React.Component {
           <div className="column">
             {this.props.hasSelectedDays ? <SpotsSpecsEditor/> : null}
           </div>
-        </ColumnsWrapper>
-        <LoadingModal isLoading={this.props.isLoading}/>
-      </MainWrapper>
+        </Columns>
+      </div>
     );
   }
 }
@@ -43,11 +41,7 @@ RoomsEditor.propTypes = {
   loadRooms: PropTypes.func.isRequired,
 };
 
-const MainWrapper = styled.div`
-  position: relative;
-`;
-
-const ColumnsWrapper = styled.div`
+const Columns = styled.div`
   opacity: ${p => p.isLoading ? 0.35 : 1.0};
   pointer-events: ${p => p.isLoading ? 'none' : 'auto'};
 `;

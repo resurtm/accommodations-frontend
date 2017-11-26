@@ -1,14 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import RoomsEditor from 'containers/rooms-editor';
+import Preloader from 'containers/tools/preloader';
 
-export default function MainLayout(props) {
+export default function MainContainer(props) {
   return (
     <Container className="container">
       <div className="columns">
         <div className="column">
-          {props.children}
+          <RoomsEditor/>
         </div>
       </div>
+      <Preloader/>
     </Container>
   );
 }

@@ -1,7 +1,7 @@
 {
   "name": "retickets",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "src/app.js",
   "repository": "https://github.com/resurtm/retickets",
   "author": "resurtm <resurtm@gmail.com>",
   "license": "MIT",
@@ -11,6 +11,7 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "bulma": "^0.6.1",

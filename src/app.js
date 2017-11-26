@@ -5,8 +5,7 @@ import {Provider} from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import reduxLogger from 'redux-logger';
 import reducer from 'reducers';
-import MainLayout from 'components/layout/main-layout';
-import RoomsEditor from 'containers/rooms-editor';
+import MainContainer from 'components/layout/main-container';
 import 'bulma/bulma.sass';
 import 'font-awesome/scss/font-awesome.scss';
 
@@ -15,16 +14,12 @@ const store = createStore(reducer, composeEnhancers(
   applyMiddleware(thunkMiddleware, reduxLogger),
 ));
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <MainLayout>
-          <RoomsEditor/>
-        </MainLayout>
-      </Provider>
-    );
-  }
+export default function App(props) {
+  return (
+    <Provider store={store}>
+      <MainContainer/>
+    </Provider>
+  );
 }
 
 render(<App/>, document.getElementById('app'));
