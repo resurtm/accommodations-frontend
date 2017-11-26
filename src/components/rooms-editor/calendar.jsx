@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CalendarMonth from './calendar-month';
-import {typedArrayOfLength} from 'tools/propTypes';
+import {typedArrayOfLength} from 'tools/prop-types';
 
 export default function Calendar(props) {
   const monthGroups = _.range(1, 4 + 1).map(i => (
@@ -23,24 +23,35 @@ export default function Calendar(props) {
   });
 
   return props.activeRoom === 0 || !props.activeRoom ? (
-    <NotSelectedNotice>In order to be able to edit calendar spots please
-      select one of the room above in the drop down list</NotSelectedNotice>
+    <P>
+      In order to be able to edit calendar spots please
+      select one of the room above in the drop down list
+    </P>
   ) : (
-    <Container onClick={() => props.onCalendarClick()}>
-      {monthGroups.map((monthGroup, key) => (
-        <div key={key} className="columns">
-          {monthGroup.map(month => (
-            <div key={month} className="column is-one-third">
-              <CalendarMonth month={month}
-                             year={props.activeYear}
-                             selectedDays={selectedDays[month]}
-                             spots={spots[month]}
-                             onDaySelected={props.onDaySelected}/>
-            </div>
-          ))}
-        </div>
-      ))}
-    </Container>
+    <div>
+      <P>
+        Single mouse button <strong>click</strong> to select day.
+        {' '}
+        <strong>Shift + click</strong> to select interval.
+        {' '}
+        <strong>Ctrl + click</strong> to select multiple independent days.
+      </P>
+      <Container onClick={() => props.onCalendarClick()}>
+        {monthGroups.map((monthGroup, key) => (
+          <div key={key} className="columns">
+            {monthGroup.map(month => (
+              <div key={month} className="column is-one-third">
+                <CalendarMonth month={month}
+                               year={props.activeYear}
+                               selectedDays={selectedDays[month]}
+                               spots={spots[month]}
+                               onDaySelected={props.onDaySelected}/>
+              </div>
+            ))}
+          </div>
+        ))}
+      </Container>
+    </div>
   );
 }
 
@@ -55,11 +66,11 @@ Calendar.propTypes = {
 
 const Container = styled.div`
   user-select: none;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
-const NotSelectedNotice = styled.p`
-  margin-top: 30px;
-  margin-bottom: 30px;
+const P = styled.p`
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;

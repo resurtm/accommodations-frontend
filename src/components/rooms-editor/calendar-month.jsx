@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CalendarDay from './calendar-day';
-import {daysInMonth, monthNames, shortWeekDays, weekDay} from 'tools/dateTime';
+import {daysInMonth, monthNames, shortWeekDays, weekDay} from 'tools/date-time';
 
 export default class CalendarMonth extends React.Component {
   constructor(props) {
@@ -9,8 +9,8 @@ export default class CalendarMonth extends React.Component {
     this.handleDaySelected = this.handleDaySelected.bind(this);
   }
 
-  handleDaySelected(isRange, day) {
-    this.props.onDaySelected(isRange, this.props.month, day);
+  handleDaySelected(isRange, isMultiple, day) {
+    this.props.onDaySelected(isRange, isMultiple, this.props.month, day);
   }
 
   render() {

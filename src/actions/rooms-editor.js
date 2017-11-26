@@ -77,6 +77,11 @@ export const selectDayRange = (month, day) => {
   return {type: SELECT_DAY_RANGE, month, day};
 };
 
+export const SELECT_DAYS = 'SELECT_DAYS';
+export const selectDays = (month, day) => {
+  return {type: SELECT_DAYS, month, day};
+};
+
 export const DESELECT_DAYS = 'DESELECT_DAYS';
 export const deselectDays = () => {
   return {type: DESELECT_DAYS};

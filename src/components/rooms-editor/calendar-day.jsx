@@ -10,7 +10,7 @@ export default class CalendarDay extends React.Component {
 
   handleClick(e) {
     e.stopPropagation();
-    this.props.onDaySelected(e.shiftKey, this.props.day);
+    this.props.onDaySelected(e.shiftKey, e.ctrlKey, this.props.day);
   }
 
   render() {

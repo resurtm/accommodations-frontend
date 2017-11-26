@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {selectDay, selectDayRange, deselectDays} from 'actions/rooms-editor';
+import {selectDay, selectDayRange, selectDays, deselectDays} from 'actions/rooms-editor';
 import Calendar from 'components/rooms-editor/calendar';
 
 const mapStateToProps = state => {
@@ -13,10 +13,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onDaySelected: (isRange, month, day) => {
-      dispatch(isRange
-        ? selectDayRange(month, day)
-        : selectDay(month, day));
+    onDaySelected: (isRange, isMultiple, month, day) => {
+      if (isRange && !isMultiple) {
+        dispatch(selectDayRange(month, day));
+      } else if (!isRange && isMultiple) {
+        dispatch(selectDays(month, day));
+      } else {
+        dispatch(selectDay(month, day));
+      }
     },
     onCalendarClick: () => {
       dispatch(deselectDays());
