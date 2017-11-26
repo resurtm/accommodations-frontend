@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CalendarDay from './calendar-day';
 import {daysInMonth, monthNames, shortWeekDays, weekDay} from 'tools/date-time';
+import {nullSpot} from 'tools/spots';
 
 export default class CalendarMonth extends React.Component {
   constructor(props) {
@@ -17,7 +18,6 @@ export default class CalendarMonth extends React.Component {
     const name = monthNames()[this.props.month];
     const count = daysInMonth(this.props.month, this.props.year);
     const day = weekDay(1, this.props.month, this.props.year);
-    const nullSpot = {status: '', count: 0, price: 0.0};
 
     const weeks = [];
     let week = [];
@@ -54,7 +54,7 @@ export default class CalendarMonth extends React.Component {
                 <CalendarDay key={dayIndex}
                              day={day}
                              selected={this.props.selectedDays.indexOf(day) !== -1}
-                             spot={day in this.props.spots ? this.props.spots[day] : nullSpot}
+                             spot={day in this.props.spots ? this.props.spots[day] : nullSpot()}
                              onDaySelected={this.handleDaySelected}/>
               )}
             </tr>

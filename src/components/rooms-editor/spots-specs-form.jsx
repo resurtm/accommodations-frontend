@@ -7,11 +7,7 @@ export default class SpotsSpecsForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = Immutable({
-      status: '',
-      count: 0,
-      price: 0.0,
-    });
+    this.state = Immutable(props.initialSpot);
 
     this.handleStatusChange = this.handleStatusChange.bind(this);
     this.handleCountChange = this.handleCountChange.bind(this);
@@ -19,6 +15,10 @@ export default class SpotsSpecsForm extends React.Component {
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleCancelClick = this.handleCancelClick.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(Immutable(nextProps.initialSpot));
   }
 
   handleStatusChange(e) {
@@ -70,7 +70,7 @@ export default class SpotsSpecsForm extends React.Component {
           <label className="label">Spots Available:</label>
           <div className="control">
             <input className="input" type="number" placeholder="Spots Available"
-                   value={this.state.count} onChange={this.handleCountChange}/>
+                   value={this.state.count ? this.state.count : ''} onChange={this.handleCountChange}/>
           </div>
         </Field>
 
@@ -78,7 +78,7 @@ export default class SpotsSpecsForm extends React.Component {
           <label className="label">Price per Spot:</label>
           <div className="control">
             <input className="input" type="number" placeholder="Price per Spot"
-                   value={this.state.price} onChange={this.handlePriceChange}/>
+                   value={this.state.price ? this.state.price : ''} onChange={this.handlePriceChange}/>
           </div>
         </Field>
 
@@ -96,6 +96,11 @@ export default class SpotsSpecsForm extends React.Component {
 }
 
 SpotsSpecsForm.propTypes = {
+  initialSpot: PropTypes.shape({
+    status: PropTypes.string.isRequired,
+    count: PropTypes.number,
+    price: PropTypes.number,
+  }).isRequired,
   onApply: PropTypes.func.isRequired,
   onReset: PropTypes.func.isRequired,
 };

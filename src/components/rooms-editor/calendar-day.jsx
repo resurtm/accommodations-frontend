@@ -33,8 +33,6 @@ CalendarDay.propTypes = {
   selected: PropTypes.bool.isRequired,
   spot: PropTypes.shape({
     status: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
   }).isRequired,
   onDaySelected: PropTypes.func.isRequired,
 };
