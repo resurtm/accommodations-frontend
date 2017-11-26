@@ -1,18 +1,19 @@
 import {connect} from 'react-redux';
 import {selectDay, selectDayRange, selectDays, deselectDays} from 'actions/rooms-editor';
 import Calendar from 'components/rooms-editor/calendar';
+import Immutable from 'seamless-immutable';
 
 const mapStateToProps = state => {
-  return {
+  return Immutable({
     activeRoom: state.roomsEditor.activeRoom,
     activeYear: state.roomsEditor.activeYear,
     selectedDays: state.roomsEditor.selectedDays,
     spots: state.roomsEditor.spots,
-  };
+  });
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
+  return Immutable({
     onDaySelected: (isRange, isMultiple, month, day) => {
       if (isRange && !isMultiple) {
         dispatch(selectDayRange(month, day));
@@ -25,7 +26,7 @@ const mapDispatchToProps = dispatch => {
     onCalendarClick: () => {
       dispatch(deselectDays());
     },
-  };
+  });
 };
 
 const CalendarSelector = connect(

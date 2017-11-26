@@ -17,6 +17,7 @@ export default class CalendarMonth extends React.Component {
     const name = monthNames()[this.props.month];
     const count = daysInMonth(this.props.month, this.props.year);
     const day = weekDay(1, this.props.month, this.props.year);
+    const nullSpot = {status: '', count: 0, price: 0.0};
 
     const weeks = [];
     let week = [];
@@ -34,8 +35,6 @@ export default class CalendarMonth extends React.Component {
     if (week.length > 0) {
       weeks.push(week);
     }
-
-    const nullSpot = {status: '', count: 0, price: 0.0};
 
     return (
       <div>
@@ -71,10 +70,12 @@ CalendarMonth.propTypes = {
   month: PropTypes.number.isRequired,
   year: PropTypes.number.isRequired,
   selectedDays: PropTypes.arrayOf(PropTypes.number).isRequired,
-  spots: PropTypes.objectOf(PropTypes.shape({
-    status: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-  })).isRequired,
+  spots: PropTypes.objectOf(
+    PropTypes.shape({
+      status: PropTypes.string.isRequired,
+      count: PropTypes.number.isRequired,
+      price: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired,
   onDaySelected: PropTypes.func.isRequired,
 };

@@ -1,4 +1,3 @@
-import Immutable from 'seamless-immutable';
 import {
   DESELECT_DAYS,
   SELECT_DAY,
@@ -11,20 +10,25 @@ import {
   SET_SPOTS,
 } from 'actions/rooms-editor';
 import {selectDayRange} from 'tools/days';
+import Immutable from 'seamless-immutable';
 
 const selectedDays = (state = [], action) => {
   switch (action.type) {
     case SELECT_DAY:
-      return [[action.month, action.day]];
+      return Immutable([
+        [action.month, action.day],
+      ]);
 
     case SELECT_DAY_RANGE:
-      return selectDayRange(state, [action.month, action.day]);
+      return Immutable(selectDayRange(state, [action.month, action.day]));
 
     case SELECT_DAYS:
-      return state.concat([[action.month, action.day]]);
+      return state.concat([
+        [action.month, action.day],
+      ]);
 
     case DESELECT_DAYS:
-      return [];
+      return Immutable([]);
 
     default:
       return state;
@@ -63,11 +67,9 @@ const roomsEditor = (state = {
       });
 
     case SET_SPOTS:
-      // todo: fixme: seamless-immutable does not work here
-      // return Immutable.merge(state, {
-      //   spots: action.spots,
-      // });
-      return {...state, spots: action.spots};
+      return Immutable.merge(state, {
+        spots: action.spots,
+      });
 
     case SELECT_DAY:
     case SELECT_DAY_RANGE:

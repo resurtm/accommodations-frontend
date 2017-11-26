@@ -1,14 +1,15 @@
 import {connect} from 'react-redux';
 import SpotsSpecsForm from 'components/rooms-editor/spots-specs-form';
+import Immutable from 'seamless-immutable';
 
 const mapStateToProps = state => {
-  return {
+  return Immutable({
     hasSelectedDays: state.roomsEditor.selectedDays.length > 0,
-  };
+  });
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return Immutable({});
 };
 
 const SpotsSpecsEditor = connect(

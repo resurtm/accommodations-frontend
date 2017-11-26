@@ -18,8 +18,9 @@ export default function Calendar(props) {
   _.forEach(props.selectedDays, ([month, day]) => {
     selectedDays[month].push(day);
   });
-  props.spots.forEach((value, key) => {
-    spots[key[0]][key[1]] = value;
+  _.forEach(props.spots, (value, key) => {
+    const [month, day] = key.split('.');
+    spots[parseInt(month, 10)][parseInt(day, 10)] = value;
   });
 
   return props.activeRoom === 0 || !props.activeRoom ? (
@@ -59,7 +60,13 @@ Calendar.propTypes = {
   activeRoom: PropTypes.number.isRequired,
   activeYear: PropTypes.number.isRequired,
   selectedDays: PropTypes.arrayOf(typedArrayOfLength.bind(null, 'number', 2)).isRequired,
-  spots: PropTypes.instanceOf(Map).isRequired,
+  spots: PropTypes.objectOf(
+    PropTypes.shape({
+      status: PropTypes.string.isRequired,
+      count: PropTypes.number.isRequired,
+      price: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired,
   onDaySelected: PropTypes.func.isRequired,
   onCalendarClick: PropTypes.func.isRequired,
 };
