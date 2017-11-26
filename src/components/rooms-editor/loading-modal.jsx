@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import preloaderImg from 'img/preloader.gif';
 
-export default class LoadingModal extends React.Component {
-  render() {
-    return !this.props.isLoading ? null : (
-      <Div>
-        <Img src={preloaderImg}/>
-      </Div>
-    );
-  }
+export default function LoadingModal(props) {
+  return !props.isLoading ? null : (
+    <Div>
+      <Img src={preloaderImg}/>
+    </Div>
+  );
 }
 
 LoadingModal.propTypes = {

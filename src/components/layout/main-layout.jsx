@@ -1,18 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default class MainLayout extends React.Component {
-  render() {
-    return (
-      <Container className="container">
-        <div className="columns">
-          <div className="column">
-            {this.props.children}
-          </div>
+export default function MainLayout(props) {
+  return (
+    <Container className="container">
+      <div className="columns">
+        <div className="column">
+          {props.children}
         </div>
-      </Container>
-    );
-  }
+      </div>
+    </Container>
+  );
 }
 
 const Container = styled.div`
