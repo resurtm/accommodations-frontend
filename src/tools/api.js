@@ -2,6 +2,10 @@ import Immutable from 'seamless-immutable';
 
 export const fetchSpots = (room, year) => {
   return new Promise((resolve, reject) => {
+    // setTimeout(() => {
+    //   reject('something bad happened')
+    // }, 1000);
+    // return;
     setTimeout(() => {
       resolve(Immutable({
         '1.13': {status: 'open', count: 10, price: 49.95},
@@ -20,6 +24,10 @@ export const fetchSpots = (room, year) => {
 
 export const fetchRooms = () => {
   return new Promise((resolve, reject) => {
+    // setTimeout(() => {
+    //   reject('something bad happened')
+    // }, 1000);
+    // return;
     setTimeout(() => {
       resolve(Immutable([
         {id: 123123, name: 'Room Type #1'},
@@ -33,6 +41,10 @@ export const fetchRooms = () => {
 
 export const submitSpots = spots => {
   return new Promise((resolve, reject) => {
+    // setTimeout(() => {
+    //   reject('something bad happened')
+    // }, 1000);
+    // return;
     setTimeout(() => {
       resolve();
     }, 1000);

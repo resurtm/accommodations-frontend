@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import {setLoading} from './is-loading';
+import {setErrorMessage} from './error-message';
 import {fetchRooms, fetchSpots, submitSpots} from 'tools/api';
 
 export const SET_ACTIVE_ROOM = 'SET_ACTIVE_ROOM';
@@ -14,32 +15,36 @@ export const setActiveRoom = room => async (dispatch, getState) => {
   try {
     const spots = await fetchSpots(room, getState().roomsEditor.year);
     dispatch(setSpots(spots));
-  }
-  catch (e) {
-
+  } catch (e) {
+    dispatch(setErrorMessage(e));
   }
   dispatch(setLoading(false));
 };
 
 export const SET_ACTIVE_YEAR = 'SET_ACTIVE_YEAR';
-export const setActiveYear = year => (dispatch, getState) => {
+export const setActiveYear = year => async (dispatch, getState) => {
   dispatch({type: SET_ACTIVE_YEAR, year});
   dispatch(setSpots({}));
 
   dispatch(setLoading(true));
-  fetchSpots(getState().roomsEditor.room, year).then(spots => {
+  try {
+    const spots = await fetchSpots(getState().roomsEditor.room, year);
     dispatch(setSpots(spots));
-    dispatch(setLoading(false));
-  });
+  } catch (e) {
+    dispatch(setErrorMessage(e));
+  }
+  dispatch(setLoading(false));
 };
 
 export const LOAD_ROOMS = 'LOAD_ROOMS';
-export const loadRooms = () => (dispatch, getState) => {
+export const loadRooms = () => async (dispatch, getState) => {
   dispatch(setLoading(true));
-  fetchRooms().then(rooms => {
-    dispatch({type: LOAD_ROOMS, rooms});
-    dispatch(setLoading(false));
-  });
+  try {
+    dispatch({type: LOAD_ROOMS, rooms: await fetchRooms()});
+  } catch (e) {
+    dispatch(setErrorMessage(e));
+  }
+  dispatch(setLoading(false));
 };
 
 export const SET_SPOTS = 'SET_SPOTS';
@@ -48,19 +53,20 @@ export const setSpots = spots => {
 };
 
 export const APPLY_SPOTS = 'APPLY_SPOTS';
-export const applySpots = spotData => (dispatch, getState) => {
+export const applySpots = spotData => async (dispatch, getState) => {
   dispatch(setLoading(true));
-
   const spots = {};
   _.forEach(getState().roomsEditor.selectedDays, ([month, day]) => {
     spots[`${month}.${day}`] = spotData;
   });
-
-  submitSpots().then(() => {
-    dispatch({type: APPLY_SPOTS, spots: spots});
+  try {
+    await submitSpots(spots);
+    dispatch({type: APPLY_SPOTS, spots});
     dispatch(deselectDays());
-    dispatch(setLoading(false));
-  });
+  } catch (e) {
+    dispatch(setErrorMessage(e));
+  }
+  dispatch(setLoading(false));
 };
 
 export const SELECT_DAY = 'SELECT_DAY';

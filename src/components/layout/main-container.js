@@ -1,18 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import RoomsEditor from 'containers/rooms-editor';
-import Preloader from 'containers/tools/preloader';
+import Preloading from 'containers/tools/preloading';
+import ErrorMessage from 'containers/tools/error-message';
 
 export default function MainContainer(props) {
   return (
-    <Container className="container">
-      <div className="columns">
-        <div className="column">
-          <RoomsEditor/>
+    <div>
+      <Container className="container">
+        <div className="columns">
+          <div className="column">
+            <RoomsEditor/>
+          </div>
         </div>
-      </div>
-      <Preloader/>
-    </Container>
+      </Container>
+      <Preloading/>
+      <ErrorMessage/>
+    </div>
   );
 }
 

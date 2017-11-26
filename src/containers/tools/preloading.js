@@ -12,9 +12,9 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
-const Preloader = connect(
+const Preloading = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(LoadingModal);
 
-export default Preloader
+export default Preloading
