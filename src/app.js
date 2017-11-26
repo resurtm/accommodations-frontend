@@ -8,6 +8,7 @@ import reducer from 'reducers';
 import MainLayout from 'components/layout/main-layout';
 import RoomsEditor from 'containers/rooms-editor';
 import 'bulma/bulma.sass';
+import 'font-awesome/scss/font-awesome.scss';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(

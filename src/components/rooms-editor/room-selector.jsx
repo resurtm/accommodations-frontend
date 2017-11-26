@@ -16,7 +16,7 @@ export default class RoomSelector extends React.Component {
     return (
       <div className="field">
         <label className="label">Select Room:</label>
-        <div className="control">
+        <div className="control has-icons-left">
           <div className="select is-info is-fullwidth">
             <select value={this.props.activeRoom}
                     onChange={this.handleRoomChanged}>
@@ -26,6 +26,7 @@ export default class RoomSelector extends React.Component {
               ))}
             </select>
           </div>
+          <span className="icon is-left"><i className="fa fa-home" aria-hidden="true"/></span>
         </div>
       </div>
     );

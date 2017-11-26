@@ -55,7 +55,7 @@ export default class SpotsSpecsForm extends React.Component {
       <form id="spots-editor" onSubmit={this.handleFormSubmit}>
         <Field className="field">
           <label className="label">Spots Status:</label>
-          <div className="control">
+          <div className="control has-icons-left">
             <div className="select is-fullwidth">
               <select value={this.state.status} onChange={this.handleStatusChange}>
                 <option value="">Not Defined</option>
@@ -63,31 +63,40 @@ export default class SpotsSpecsForm extends React.Component {
                 <option value="close">Closed</option>
               </select>
             </div>
+            <span className="icon is-left"><i className="fa fa-cog" aria-hidden="true"/></span>
           </div>
         </Field>
 
         <Field className="field">
           <label className="label">Spots Available:</label>
-          <div className="control">
+          <div className="control has-icons-left">
             <input className="input" type="number" placeholder="Spots Available"
                    value={this.state.count ? this.state.count : ''} onChange={this.handleCountChange}/>
+            <span className="icon is-left"><i className="fa fa-hashtag" aria-hidden="true"/></span>
           </div>
         </Field>
 
         <Field className="field">
           <label className="label">Price per Spot:</label>
-          <div className="control">
+          <div className="control has-icons-left">
             <input className="input" type="number" placeholder="Price per Spot"
                    value={this.state.price ? this.state.price : ''} onChange={this.handlePriceChange}/>
+            <span className="icon is-left"><i className="fa fa-usd" aria-hidden="true"/></span>
           </div>
         </Field>
 
         <Field className="field is-grouped">
           <div className="control">
-            <button className="button is-info" type="submit">Apply</button>
+            <button className="button is-info" type="submit">
+              <span className="icon"><i className="fa fa-check"/></span>
+              <span>Apply</span>
+            </button>
           </div>
           <div className="control">
-            <button className="button is-text" type="reset" onClick={this.handleCancelClick}>Cancel</button>
+            <button className="button" type="reset" onClick={this.handleCancelClick}>
+              <span className="icon"><i className="fa fa-times"/></span>
+              <span>Cancel</span>
+            </button>
           </div>
         </Field>
       </form>
