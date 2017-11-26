@@ -1,15 +1,21 @@
 import {connect} from 'react-redux';
+import {deselectDays, applySpots} from 'actions/rooms-editor';
 import SpotsSpecsForm from 'components/rooms-editor/spots-specs-form';
 import Immutable from 'seamless-immutable';
 
 const mapStateToProps = state => {
-  return Immutable({
-    hasSelectedDays: state.roomsEditor.selectedDays.length > 0,
-  });
+  return Immutable({});
 };
 
 const mapDispatchToProps = dispatch => {
-  return Immutable({});
+  return Immutable({
+    onApply: (spotData) => {
+      dispatch(applySpots(spotData));
+    },
+    onReset: () => {
+      dispatch(deselectDays());
+    },
+  });
 };
 
 const SpotsSpecsEditor = connect(

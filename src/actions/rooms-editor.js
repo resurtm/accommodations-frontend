@@ -1,4 +1,5 @@
 import Immutable from 'seamless-immutable';
+import _ from 'lodash';
 
 export const SET_LOADING = 'SET_LOADING';
 export const setLoading = isLoading => {
@@ -12,6 +13,7 @@ export const setActiveRoom = room => {
 
 const loadSpots = (dispatch, getState) => {
   dispatch(setLoading(true));
+  // todo: fixme: get the real data from the server api
   setTimeout(() => {
     dispatch(setSpots(Immutable({
       '1.13': {status: 'open', count: 10, price: 49.95},
@@ -53,8 +55,9 @@ export const setActiveYear = year => {
   return Immutable({type: SET_ACTIVE_YEAR, year});
 };
 
-export const loadRooms = () => dispatch => {
+export const loadRooms = () => (dispatch, getState) => {
   dispatch(setLoading(true));
+  // todo: fixme: get the real data from the server api
   setTimeout(() => {
     dispatch(setRooms(Immutable([
       {id: 123123, name: 'Room Type #1'},
@@ -69,6 +72,23 @@ export const loadRooms = () => dispatch => {
 export const SET_SPOTS = 'SET_SPOTS';
 export const setSpots = spots => {
   return Immutable({type: SET_SPOTS, spots});
+};
+
+export const APPLY_SPOTS = 'APPLY_SPOTS';
+export const applySpots = spotData => (dispatch, getState) => {
+  dispatch(setLoading(true));
+
+  const spots = {};
+  _.forEach(getState().roomsEditor.selectedDays, ([month, day]) => {
+    spots[`${month}.${day}`] = spotData;
+  });
+
+  // todo: fixme: submit the real data to the server api
+  setTimeout(() => {
+    dispatch(Immutable({type: APPLY_SPOTS, spots: spots}));
+    dispatch(deselectDays());
+    dispatch(setLoading(false));
+  }, 1000);
 };
 
 export const SELECT_DAY = 'SELECT_DAY';

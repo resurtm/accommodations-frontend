@@ -31,11 +31,11 @@ export default function Calendar(props) {
   ) : (
     <div>
       <P>
-        Single mouse button <strong>click</strong> to select day.
+        Single mouse button <strong>Click</strong> to select day.
         {' '}
-        <strong>Shift + click</strong> to select interval.
+        <strong>Shift + Click</strong> to select interval.
         {' '}
-        <strong>Ctrl + click</strong> to select multiple independent days.
+        <strong>Ctrl + Click</strong> to select multiple independent days.
       </P>
       <Container onClick={() => props.onCalendarClick()}>
         {monthGroups.map((monthGroup, key) => (

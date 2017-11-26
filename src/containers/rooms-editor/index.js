@@ -6,6 +6,7 @@ import Immutable from 'seamless-immutable';
 const mapStateToProps = state => {
   return Immutable({
     isLoading: state.roomsEditor.isLoading,
+    hasSelectedDays: state.roomsEditor.selectedDays.length > 0,
   });
 };
 

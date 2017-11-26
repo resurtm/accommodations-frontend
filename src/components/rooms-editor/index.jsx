@@ -28,7 +28,7 @@ export default class RoomsEditor extends React.Component {
             <CalendarSelector/>
           </div>
           <div className="column">
-            <SpotsSpecsEditor/>
+            {this.props.hasSelectedDays ? <SpotsSpecsEditor/> : null}
           </div>
         </ColumnsWrapper>
         <LoadingModal isLoading={this.props.isLoading}/>
@@ -39,6 +39,7 @@ export default class RoomsEditor extends React.Component {
 
 RoomsEditor.propTypes = {
   isLoading: PropTypes.bool.isRequired,
+  hasSelectedDays: PropTypes.bool.isRequired,
   loadRooms: PropTypes.func.isRequired,
 };
 
