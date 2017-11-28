@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './navbar';
+import Footer from './footer';
 import RoomsEditor from 'containers/rooms-editor';
 import Preloading from 'containers/tools/preloading';
 import ErrorMessage from 'containers/tools/error-message';
@@ -13,6 +14,7 @@ export default function MainContainer(props) {
           <RoomsEditor/>
         </div>
       </section>
+      <Footer/>
       <Preloading/>
       <ErrorMessage/>
     </div>
