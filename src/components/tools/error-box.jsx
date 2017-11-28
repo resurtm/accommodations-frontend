@@ -1,3 +1,4 @@
+import Immutable from 'seamless-immutable';
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -5,15 +6,15 @@ import styled from 'styled-components';
 export default class ErrorBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = Immutable({
       errorMessage: props.errorMessage,
-    };
+    });
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
+    this.setState(Immutable({
       errorMessage: nextProps.errorMessage,
-    });
+    }));
   }
 
   render() {

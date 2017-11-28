@@ -2,30 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export default class CalendarDay extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(e) {
-    e.stopPropagation();
-    this.props.onDaySelected(e.shiftKey, e.ctrlKey, this.props.day);
-  }
-
-  render() {
-    return this.props.day === -1
-      ? <td className="has-text-centered">&nbsp;</td>
-      : (
-        <Td className="has-text-centered"
-            selected={this.props.selected}
-            opened={this.props.spot.status === 'open'}
-            closed={this.props.spot.status === 'close'}
-            onClick={this.handleClick}>
-          {this.props.day}
-        </Td>
-      );
-  }
+export default function CalendarDay(props) {
+  return props.day === -1
+    ? (
+      <td className="has-text-centered">&nbsp;</td>
+    ) : (
+      <Td className="has-text-centered"
+          selected={props.selected}
+          opened={props.spot.status === 'open'}
+          closed={props.spot.status === 'close'}
+          onClick={e => {
+            e.stopPropagation();
+            props.onDaySelected(e.shiftKey, e.ctrlKey, props.day)
+          }}>
+        {props.day}
+      </Td>
+    );
 }
 
 CalendarDay.propTypes = {

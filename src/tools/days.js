@@ -1,10 +1,11 @@
+import Immutable from 'seamless-immutable';
+
 export function selectDayRange(days, day) {
   if (days.length === 0) {
-    return [day]
+    return Immutable([day]);
   }
-  return days[0][0] * 31 + days[0][1] < day[0] * 31 + day[1]
-    ? selectDayRangeInternal(days[0], day)
-    : selectDayRangeInternal(day, days[0]);
+  const args = days[0][0] * 31 + days[0][1] < day[0] * 31 + day[1] ? [days[0], day] : [day, days[0]];
+  return Immutable(selectDayRangeInternal.apply(null, args));
 }
 
 function selectDayRangeInternal([startMonth, startDay], [endMonth, endDay]) {

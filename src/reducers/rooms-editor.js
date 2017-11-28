@@ -25,7 +25,7 @@ const spots = (state = {}, action) => {
           delete spots[key];
         }
       });
-      return Immutable.merge(spots);
+      return Immutable(spots);
 
     default:
       return state;

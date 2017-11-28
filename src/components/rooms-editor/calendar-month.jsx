@@ -4,66 +4,55 @@ import CalendarDay from './calendar-day';
 import {daysInMonth, monthNames, shortWeekDays, weekDay} from 'tools/date-time';
 import {nullSpot} from 'tools/spots';
 
-export default class CalendarMonth extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleDaySelected = this.handleDaySelected.bind(this);
+export default function CalendarMonth(props) {
+  const count = daysInMonth(props.month, props.year);
+  const day = weekDay(1, props.month, props.year);
+  const weeks = [];
+  let week = [];
+  for (let i = 0; i < day - 1; i++) {
+    week.push(-1);
   }
-
-  handleDaySelected(isRange, isMultiple, day) {
-    this.props.onDaySelected(isRange, isMultiple, this.props.month, day);
-  }
-
-  render() {
-    const name = monthNames()[this.props.month];
-    const count = daysInMonth(this.props.month, this.props.year);
-    const day = weekDay(1, this.props.month, this.props.year);
-
-    const weeks = [];
-    let week = [];
-    for (let i = 0; i < day - 1; i++) {
-      week.push(-1);
-    }
-    for (let i = 0, j = day - 1; i < count; i++, j++) {
-      if (j === 7) {
-        j = 0;
-        weeks.push(week);
-        week = [];
-      }
-      week.push(i + 1);
-    }
-    if (week.length > 0) {
+  for (let i = 0, j = day - 1; i < count; i++, j++) {
+    if (j === 7) {
+      j = 0;
       weeks.push(week);
+      week = [];
     }
+    week.push(i + 1);
+  }
+  if (week.length > 0) {
+    weeks.push(week);
+  }
 
-    return (
-      <div>
-        <h2 className="subtitle">{name}</h2>
-        <table className="table is-fullwidth is-narrow">
-          <thead>
-          <tr>
-            {shortWeekDays().map(weekDay =>
-              <th key={weekDay} className="has-text-centered">{weekDay}</th>
+  return (
+    <div>
+      <h2 className="subtitle">{monthNames()[props.month]}</h2>
+      <table className="table is-fullwidth is-narrow">
+        <thead>
+        <tr>
+          {shortWeekDays().map(weekDay =>
+            <th key={weekDay} className="has-text-centered">{weekDay}</th>
+          )}
+        </tr>
+        </thead>
+        <tbody>
+        {weeks.map((week, weekIndex) =>
+          <tr key={weekIndex}>
+            {week.map((day, dayIndex) =>
+              <CalendarDay key={dayIndex}
+                           day={day}
+                           selected={props.selectedDays.indexOf(day) !== -1}
+                           spot={day in props.spots ? props.spots[day] : nullSpot()}
+                           onDaySelected={(isRange, isMultiple, day) => {
+                             props.onDaySelected(isRange, isMultiple, props.month, day)
+                           }}/>
             )}
           </tr>
-          </thead>
-          <tbody>
-          {weeks.map((week, weekIndex) =>
-            <tr key={weekIndex}>
-              {week.map((day, dayIndex) =>
-                <CalendarDay key={dayIndex}
-                             day={day}
-                             selected={this.props.selectedDays.indexOf(day) !== -1}
-                             spot={day in this.props.spots ? this.props.spots[day] : nullSpot()}
-                             onDaySelected={this.handleDaySelected}/>
-              )}
-            </tr>
-          )}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
+        )}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
 CalendarMonth.propTypes = {
@@ -73,8 +62,8 @@ CalendarMonth.propTypes = {
   spots: PropTypes.objectOf(
     PropTypes.shape({
       status: PropTypes.string.isRequired,
-      count: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
+      count: PropTypes.number,
+      price: PropTypes.number,
     }).isRequired,
   ).isRequired,
   onDaySelected: PropTypes.func.isRequired,

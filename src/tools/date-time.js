@@ -1,3 +1,5 @@
+import Immutable from 'seamless-immutable';
+
 export function daysInMonth(month, year) {
   return new Date(year, month, 0).getDate();
 }
@@ -8,10 +10,10 @@ export function weekDay(day, month, year) {
 }
 
 export function shortWeekDays() {
-  return ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+  return Immutable(['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']);
 }
 
 export function monthNames() {
-  return ['', 'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'];
+  return Immutable(['', 'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December']);
 }

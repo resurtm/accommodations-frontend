@@ -16,7 +16,7 @@ import 'font-awesome/scss/font-awesome.scss';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(
-  applyMiddleware(reduxLogger, thunkMiddleware),
+  applyMiddleware(/*reduxLogger, */thunkMiddleware),
 ));
 
 export default function App(props) {

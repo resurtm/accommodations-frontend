@@ -1,12 +1,13 @@
 import _ from 'lodash';
+import Immutable from 'seamless-immutable';
 import {setLoading} from './is-loading';
 import {setErrorMessage} from './error-message';
 import {fetchRooms, fetchSpots, submitSpots} from 'tools/api';
 
 export const SET_ACTIVE_ROOM = 'SET_ACTIVE_ROOM';
 export const setActiveRoom = room => async (dispatch, getState) => {
-  dispatch({type: SET_ACTIVE_ROOM, room});
-  dispatch(setSpots({}));
+  dispatch(Immutable({type: SET_ACTIVE_ROOM, room}));
+  dispatch(clearSpots());
   if (room === 0 || !room) {
     return;
   }
@@ -23,8 +24,14 @@ export const setActiveRoom = room => async (dispatch, getState) => {
 
 export const SET_ACTIVE_YEAR = 'SET_ACTIVE_YEAR';
 export const setActiveYear = year => async (dispatch, getState) => {
-  dispatch({type: SET_ACTIVE_YEAR, year});
-  dispatch(setSpots({}));
+  dispatch(Immutable({type: SET_ACTIVE_YEAR, year}));
+  dispatch(clearSpots());
+
+  // it does not make sense to try to load something in case year *selected* but room *is not selected*
+  const activeRoom = getState().roomsEditor.activeRoom;
+  if (activeRoom === 0 || !activeRoom) {
+    return;
+  }
 
   dispatch(setLoading(true));
   try {
@@ -40,7 +47,8 @@ export const LOAD_ROOMS = 'LOAD_ROOMS';
 export const loadRooms = () => async (dispatch, getState) => {
   dispatch(setLoading(true));
   try {
-    dispatch({type: LOAD_ROOMS, rooms: await fetchRooms()});
+    const rooms = await fetchRooms();
+    dispatch(Immutable({type: LOAD_ROOMS, rooms}));
   } catch (e) {
     dispatch(setErrorMessage(e));
   }
@@ -49,7 +57,10 @@ export const loadRooms = () => async (dispatch, getState) => {
 
 export const SET_SPOTS = 'SET_SPOTS';
 export const setSpots = spots => {
-  return {type: SET_SPOTS, spots};
+  return Immutable({type: SET_SPOTS, spots});
+};
+export const clearSpots = () => {
+  return setSpots({});
 };
 
 export const APPLY_SPOTS = 'APPLY_SPOTS';
@@ -61,7 +72,7 @@ export const applySpots = spotData => async (dispatch, getState) => {
   });
   try {
     await submitSpots(spots);
-    dispatch({type: APPLY_SPOTS, spots});
+    dispatch(Immutable({type: APPLY_SPOTS, spots}));
     dispatch(deselectDays());
   } catch (e) {
     dispatch(setErrorMessage(e));
@@ -71,20 +82,20 @@ export const applySpots = spotData => async (dispatch, getState) => {
 
 export const SELECT_DAY = 'SELECT_DAY';
 export const selectDay = (month, day) => {
-  return {type: SELECT_DAY, month, day};
+  return Immutable({type: SELECT_DAY, month, day});
 };
 
 export const SELECT_DAY_RANGE = 'SELECT_DAY_RANGE';
 export const selectDayRange = (month, day) => {
-  return {type: SELECT_DAY_RANGE, month, day};
+  return Immutable({type: SELECT_DAY_RANGE, month, day});
 };
 
 export const SELECT_DAYS = 'SELECT_DAYS';
 export const selectDays = (month, day) => {
-  return {type: SELECT_DAYS, month, day};
+  return Immutable({type: SELECT_DAYS, month, day});
 };
 
 export const DESELECT_DAYS = 'DESELECT_DAYS';
 export const deselectDays = () => {
-  return {type: DESELECT_DAYS};
+  return Immutable({type: DESELECT_DAYS});
 };

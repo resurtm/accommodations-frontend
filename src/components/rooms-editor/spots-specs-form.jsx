@@ -43,7 +43,7 @@ export default class SpotsSpecsForm extends React.Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    this.props.onApply(this.state);
+    this.props.onApply(Immutable(this.state));
   }
 
   handleCancelClick(e) {

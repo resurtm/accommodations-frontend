@@ -1,7 +1,8 @@
 import _ from 'lodash';
+import Immutable from 'seamless-immutable';
 
 export function nullSpot() {
-  return {status: '', count: null, price: null};
+  return Immutable({status: '', count: null, price: null});
 }
 
 export function compareSpots(s1, s2) {
@@ -23,5 +24,5 @@ export function calcCommonSpot(days, spots) {
       return false;
     }
   });
-  return res ? res : nullSpot();
+  return Immutable(res ? res : nullSpot());
 }

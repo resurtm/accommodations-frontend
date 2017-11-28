@@ -24,19 +24,19 @@ export default function Calendar(props) {
   });
 
   return props.activeRoom === 0 || !props.activeRoom ? (
-    <P>
+    <Note>
       In order to be able to edit calendar spots please
       select one of the room above in the drop down list
-    </P>
+    </Note>
   ) : (
     <div>
-      <P>
+      <Note>
         Single mouse button <strong>Click</strong> to select day.
         {' '}
         <strong>Shift + Click</strong> to select interval.
         {' '}
         <strong>Ctrl + Click</strong> to select multiple independent days.
-      </P>
+      </Note>
       <Container onClick={() => props.onCalendarClick()}>
         {monthGroups.map((monthGroup, key) => (
           <div key={key} className="columns">
@@ -63,8 +63,8 @@ Calendar.propTypes = {
   spots: PropTypes.objectOf(
     PropTypes.shape({
       status: PropTypes.string.isRequired,
-      count: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
+      count: PropTypes.number,
+      price: PropTypes.number,
     }).isRequired,
   ).isRequired,
   onDaySelected: PropTypes.func.isRequired,
@@ -77,7 +77,7 @@ const Container = styled.div`
   margin-bottom: 20px;
 `;
 
-const P = styled.p`
+const Note = styled.p`
   margin-top: 15px;
   margin-bottom: 15px;
 `;
