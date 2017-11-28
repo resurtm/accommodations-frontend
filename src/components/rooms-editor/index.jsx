@@ -13,24 +13,22 @@ export default class RoomsEditor extends React.Component {
 
   render() {
     return (
-      <div>
-        <Columns className="columns" isLoading={this.props.isLoading}>
-          <div className="column is-four-fifths">
-            <div className="columns">
-              <div className="column is-two-fifths">
-                <ActiveRoomSelector/>
-              </div>
-              <div className="column">
-                <ActiveYearSelector/>
-              </div>
+      <Columns className="columns" isLoading={this.props.isLoading}>
+        <div className="column is-four-fifths">
+          <div className="columns">
+            <div className="column is-two-fifths">
+              <ActiveRoomSelector/>
             </div>
-            <CalendarSelector/>
+            <div className="column">
+              <ActiveYearSelector/>
+            </div>
           </div>
-          <div className="column">
-            {this.props.hasSelectedDays ? <SpotsSpecsEditor/> : null}
-          </div>
-        </Columns>
-      </div>
+          <CalendarSelector/>
+        </div>
+        <div className="column">
+          {this.props.hasSelectedDays ? <SpotsSpecsEditor/> : null}
+        </div>
+      </Columns>
     );
   }
 }

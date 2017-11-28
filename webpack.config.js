@@ -50,4 +50,7 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   devtool: 'eval-source-map',
+  devServer: {
+    historyApiFallback: true,
+  },
 };

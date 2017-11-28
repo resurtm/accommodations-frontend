@@ -78,6 +78,6 @@ const Container = styled.div`
 `;
 
 const P = styled.p`
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 `;

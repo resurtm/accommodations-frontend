@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import Navbar from './navbar';
 import RoomsEditor from 'containers/rooms-editor';
 import Preloading from 'containers/tools/preloading';
 import ErrorMessage from 'containers/tools/error-message';
@@ -7,20 +7,14 @@ import ErrorMessage from 'containers/tools/error-message';
 export default function MainContainer(props) {
   return (
     <div>
-      <Container className="container">
-        <div className="columns">
-          <div className="column">
-            <RoomsEditor/>
-          </div>
+      <Navbar/>
+      <section className="section">
+        <div className="container">
+          <RoomsEditor/>
         </div>
-      </Container>
+      </section>
       <Preloading/>
       <ErrorMessage/>
     </div>
   );
 }
-
-const Container = styled.div`
-  margin-top: 75px;
-  margin-bottom: 75px;
-`;
