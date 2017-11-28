@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Navbar(props) {
@@ -21,7 +22,7 @@ export default function Navbar(props) {
       <div className="container">
 
         <div className="navbar-brand">
-          <LogoLink className="navbar-item" href="#">
+          <LogoLink to="/" className="navbar-item" href="#">
             <i className="fa fa-free-code-camp" aria-hidden="true"/>
             reTickets
           </LogoLink>
@@ -34,12 +35,12 @@ export default function Navbar(props) {
 
         <div id="navbar-main-menu" className="navbar-menu">
           <div className="navbar-start">
-            <a className="navbar-item" href="#">Home</a>
+            <Link to="/" className="navbar-item">Home</Link>
             <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link" href="#">Accommodations</a>
+              <a className="navbar-link" href="#" onClick={e => e.preventDefault()}>Accommodations</a>
               <div className="navbar-dropdown is-boxed">
                 <a className="navbar-item" href="#">Manage</a>
-                <a className="navbar-item" href="#">Edit Spots</a>
+                <Link to="/spots" className="navbar-item">Edit Spots</Link>
               </div>
             </div>
           </div>
@@ -52,7 +53,7 @@ export default function Navbar(props) {
   );
 }
 
-const LogoLink = styled.a`
+const LogoLink = styled(Link)`
   font-size: 30px;
   & > i {
     margin-right: 15px;
