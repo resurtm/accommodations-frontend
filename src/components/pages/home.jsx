@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Home(props) {
   return (
-    <section className="hero is-info is-bold">
+    <section className="hero is-info is-medium is-bold">
       <div className="hero-body">
         <div className="container">
           <h1 className="title">

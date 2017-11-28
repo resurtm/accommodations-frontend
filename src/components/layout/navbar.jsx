@@ -39,7 +39,7 @@ export default function Navbar(props) {
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link" href="#" onClick={e => e.preventDefault()}>Accommodations</a>
               <div className="navbar-dropdown is-boxed">
-                <a className="navbar-item" href="#">Manage</a>
+                <Link to="/accommodations" className="navbar-item">Manage</Link>
                 <Link to="/spots" className="navbar-item">Edit Spots</Link>
               </div>
             </div>
