@@ -1,19 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function Navbar() {
-  const loggedIn = true;
-
-  const navbarEnd = loggedIn ? (
+export default function NavbarBlock(props) {
+  const navbarEnd = props.loggedIn ? (
     <div className="navbar-end">
-      <a className="navbar-item" href="#">Settings</a>
+      <a className="navbar-item" href="#">{props.email}</a>
       <a className="navbar-item" href="#">Logout</a>
     </div>
   ) : (
     <div className="navbar-end">
-      <a className="navbar-item" href="#">Login</a>
-      <a className="navbar-item" href="#">Create Account</a>
+      <Link to="/login" className="navbar-item">Login</Link>
+      <Link to="/register" className="navbar-item">Create Account</Link>
     </div>
   );
 
@@ -52,9 +51,16 @@ export default function Navbar() {
   );
 }
 
+NavbarBlock.propTypes = {
+  email: PropTypes.string,
+  loggedIn: PropTypes.bool,
+};
+
+NavbarBlock.defaultProps = {
+  email: null,
+  loggedIn: false,
+};
+
 const LogoLink = styled(Link)`
   font-size: 30px;
-  & > i {
-    margin-right: 15px;
-  }
 `;

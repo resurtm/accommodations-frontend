@@ -11,13 +11,6 @@ export const signinUser = async (email, password) => {
   }));
 };
 
-/*export const signoutUser = () => {
-  // todo: make real ajax request here
-  setTimeout(() => {
-    resolve({email});
-  }, 2000);
+export const signoutUser = async () => {
+  await axios.post(`${API_URL}auth/signout`);
 };
-
-export const signupUser = (login, password) => {
-
-};*/

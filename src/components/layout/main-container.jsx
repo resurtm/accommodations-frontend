@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 
-import Navbar from './navbar';
+import NavbarSection from './navbar-section';
 import Footer from './footer';
 import StandardLayout from 'layout/standard-layout';
 
@@ -18,7 +18,7 @@ import ErrorMessage from 'containers/tools/error-message';
 export default function MainContainer() {
   return (
     <div>
-      <Navbar/>
+      <NavbarSection/>
 
       <Route exact path="/" component={Home}/>
       <Route path="/spots" component={StandardLayout(RoomsEditor)}/>
