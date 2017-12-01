@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-export default function LoginFormField(props) {
+export default function Field(props) {
   let rightIcon = props.rightIcon === null ? null : props.rightIcon;
   if (props.rightIcon === null && props.state !== null) {
     switch (props.state) {
@@ -23,7 +24,7 @@ export default function LoginFormField(props) {
   }
 
   return (
-    <div className="field">
+    <StyledField className="field">
       <label className="label">{props.label}:</label>
 
       <div className={controlClasses.join(' ')}>
@@ -57,11 +58,11 @@ export default function LoginFormField(props) {
           {props.errorText}
         </p>
       }
-    </div>
+    </StyledField>
   );
 }
 
-LoginFormField.propTypes = {
+Field.propTypes = {
   state: PropTypes.string,
 
   type: PropTypes.string,
@@ -78,7 +79,7 @@ LoginFormField.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-LoginFormField.defaultProps = {
+Field.defaultProps = {
   state: null,
 
   type: 'text',
@@ -90,3 +91,8 @@ LoginFormField.defaultProps = {
   helpText: null,
   errorText: null,
 };
+
+const StyledField = styled.div`
+  margin-top: 25px;
+  margin-bottom: 25px;
+`;
