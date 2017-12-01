@@ -1,9 +1,9 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 
-import Navbar from './navbar';
-import Footer from './footer';
-import StandardLayout from './standard-layout';
+import Navbar from 'layout/navbar';
+import Footer from 'layout/footer';
+import StandardLayout from 'layout/standard-layout';
 
 import Home from 'components/pages/home';
 import RoomsEditor from 'containers/rooms-editor';

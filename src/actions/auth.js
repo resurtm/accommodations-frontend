@@ -1,4 +1,5 @@
 import {signinUser, signoutUser} from 'service/auth';
+import _ from 'lodash';
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -10,7 +11,10 @@ export const loginUser = (email, password) => async dispatch => {
     await signinUser(email, password);
     dispatch({type: USER_LOGIN_SUCCESS, email});
   } catch (error) {
-    dispatch({type: USER_LOGIN_FAILURE, error});
+    dispatch({
+      type: USER_LOGIN_FAILURE,
+      error: _.get(error.response, 'data.msg', error.response.statusText),
+    });
   }
 };
 

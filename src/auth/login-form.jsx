@@ -33,6 +33,12 @@ export default class LoginForm extends React.Component {
     this.onPasswordChange = this.onPasswordChange.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      errors: {'email': nextProps.error},
+    });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
@@ -84,4 +90,9 @@ export default class LoginForm extends React.Component {
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+};
+
+LoginForm.defaultProps = {
+  error: null,
 };
