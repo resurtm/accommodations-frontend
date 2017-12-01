@@ -3,8 +3,8 @@ import {Redirect} from 'react-router';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import _ from 'lodash';
-import Field from 'auth/field';
-import Buttons from 'auth/buttons';
+import Field from './field';
+import Buttons from './buttons';
 
 const validationRules = {
   email: {

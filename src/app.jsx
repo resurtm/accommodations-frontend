@@ -8,7 +8,7 @@ import thunkMiddleware from 'redux-thunk';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 import reducer from 'reducers';
-import MainContainer from 'layout/main-container';
+import MainContainer from 'components/layout/main-container';
 
 import 'bulma/bulma.sass';
 import 'font-awesome/scss/font-awesome.scss';

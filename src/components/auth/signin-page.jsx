@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {loginUser} from 'actions/auth';
-import LoginForm from 'auth/login-form';
+import LoginForm from './login-form';
 
 const mapStateToProps = state => {
   return {

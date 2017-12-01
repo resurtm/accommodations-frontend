@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function Footer(props) {
+export default function Footer() {
   return (
     <Wrapper className="footer">
       <div className="container">

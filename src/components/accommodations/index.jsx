@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Accommodations(props) {
+export default function Accommodations() {
   return (
     <div>
       <table className="table is-fullwidth">

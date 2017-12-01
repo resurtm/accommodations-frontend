@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Field from 'auth/field';
-import TosAgreement from 'auth/tos-agreement';
-import Buttons from 'auth/buttons';
+import Field from './field';
+import TosAgreement from './tos-agreement';
+import Buttons from './buttons';
 
 export default class RegisterForm extends React.Component {
   constructor(props) {

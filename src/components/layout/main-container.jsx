@@ -1,16 +1,16 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 
-import Navbar from 'layout/navbar';
-import Footer from 'layout/footer';
+import Navbar from './navbar';
+import Footer from './footer';
 import StandardLayout from 'layout/standard-layout';
 
 import Home from 'components/pages/home';
 import RoomsEditor from 'containers/rooms-editor';
 import Accommodations from 'components/accommodations';
 
-import SigninPage from 'auth/signin-page';
-import RegisterForm from 'auth/register-form';
+import SigninPage from 'components/auth/signin-page';
+import RegisterForm from 'components/auth/register-form';
 
 import Preloading from 'containers/tools/preloading';
 import ErrorMessage from 'containers/tools/error-message';
