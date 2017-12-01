@@ -1,4 +1,4 @@
-import {signinUser, signoutUser, checkAuthToken} from 'service/auth';
+import {signinUser, signoutUser, checkAuthToken, signupUser} from 'service/auth';
 import _ from 'lodash';
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
@@ -28,7 +28,10 @@ export const logoutUser = () => async dispatch => {
     await signoutUser();
     dispatch({type: USER_LOGOUT_SUCCESS});
   } catch (error) {
-    dispatch({type: USER_LOGOUT_FAILURE, error});
+    dispatch({
+      type: USER_LOGOUT_FAILURE,
+      error: _.get(error.response, 'data.msg', error.response.statusText),
+    });
   }
 };
 
@@ -46,6 +49,9 @@ export const checkUserAuth = () => async dispatch => {
     await checkAuthToken();
     dispatch({type: CHECK_USER_AUTH_SUCCESS});
   } catch (error) {
-    dispatch({type: CHECK_USER_AUTH_FAILURE, error});
+    dispatch({
+      type: CHECK_USER_AUTH_FAILURE,
+      error: _.get(error.response, 'data.msg', error.response.statusText),
+    });
   }
 };

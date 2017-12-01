@@ -12,7 +12,9 @@ export const signinUser = async (email, password) => {
 };
 
 export const signoutUser = async () => {
-  await axios.post(`${API_URL}auth/signout`);
+};
+
+export const signupUser = async (username, email, password) => {
 };
 
 export const checkAuthToken = async (token) => {
@@ -20,7 +22,6 @@ export const checkAuthToken = async (token) => {
   if (!authUser) {
     throw new Error('cannot check auth token for the guest user');
   }
-
   try {
     const resp = (await axios.post(`${API_URL}auth/check`, {token: authUser.token})).data;
     if (!resp.ok) {
