@@ -1,8 +1,11 @@
 export const signinUser = (email, password) => new Promise((resolve, reject) => {
   // todo: make real ajax request here
+  // setTimeout(() => {
+  //   resolve({email});
+  // }, 1500);
   setTimeout(() => {
-    resolve({email});
-  }, 2000);
+    reject({email});
+  }, 1500);
 });
 
 export const signoutUser = () => {

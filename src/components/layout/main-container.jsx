@@ -9,7 +9,7 @@ import Home from 'components/pages/home';
 import RoomsEditor from 'containers/rooms-editor';
 import Accommodations from 'components/accommodations';
 
-import LoginForm from 'auth/login-form';
+import SigninPage from 'auth/signin-page';
 import RegisterForm from 'auth/register-form';
 
 import Preloading from 'containers/tools/preloading';
@@ -24,7 +24,7 @@ export default function MainContainer() {
       <Route path="/spots" component={StandardLayout(RoomsEditor)}/>
       <Route path="/accommodations" component={StandardLayout(Accommodations)}/>
 
-      <Route path="/login" component={StandardLayout(LoginForm)}/>
+      <Route path="/login" component={StandardLayout(SigninPage)}/>
       <Route path="/register" component={StandardLayout(RegisterForm)}/>
 
       <Footer/>
