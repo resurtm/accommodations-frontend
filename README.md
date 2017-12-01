@@ -1,5 +1,5 @@
-reTickets
-=========
+Accommodations Frontend
+=======================
 
 TODO:
 

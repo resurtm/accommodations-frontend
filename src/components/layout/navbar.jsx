@@ -24,7 +24,6 @@ export default function Navbar(props) {
         <div className="navbar-brand">
           <LogoLink to="/" className="navbar-item" href="#">
             <i className="fa fa-free-code-camp" aria-hidden="true"/>
-            reTickets
           </LogoLink>
           <div className="navbar-burger burger" data-target="navbar-main-menu">
             <span/>

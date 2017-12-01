@@ -7,7 +7,7 @@ export default function Footer(props) {
       <div className="container">
         <div className="content has-text-centered">
           <p>
-            <strong>reTickets</strong> by <a href="http://resurtm.com">resurtm</a>
+            <strong>Accommodations</strong> by <a href="http://resurtm.com">resurtm</a>
             <br/>
             The source code is licensed under
             {' '}

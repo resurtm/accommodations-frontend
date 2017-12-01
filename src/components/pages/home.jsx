@@ -6,7 +6,7 @@ export default function Home(props) {
       <div className="hero-body">
         <div className="container">
           <h1 className="title">
-            reTickets Managers App
+            Accommodations Manager App
           </h1>
           <h2 className="subtitle">
             Manage Your Trip Accommodations Easily!

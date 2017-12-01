@@ -1,8 +1,8 @@
 {
-  "name": "retickets",
+  "name": "accommodations-frontend",
   "version": "0.0.1",
   "main": "src/app.js",
-  "repository": "https://github.com/resurtm/retickets",
+  "repository": "https://github.com/resurtm/accommodations-frontend",
   "author": "resurtm <resurtm@gmail.com>",
   "license": "MIT",
   "devDependencies": {
