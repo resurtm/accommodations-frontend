@@ -1,10 +1,11 @@
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import {loginUser} from 'actions/auth';
 import LoginForm from 'auth/login-form';
 
 const mapStateToProps = state => {
   return {
-
+    loggedIn: state.auth.loggedIn,
   };
 };
 
@@ -16,9 +17,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const SigninPage = connect(
+const SigninPage = withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(LoginForm);
+)(LoginForm));
 
 export default SigninPage

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router';
 import PropTypes from 'prop-types';
 import Field from 'auth/field';
 import Buttons from 'auth/buttons';
@@ -31,6 +32,10 @@ export default class LoginForm extends React.Component {
   }
 
   render() {
+    if (this.props.loggedIn) {
+      return <Redirect to="/" push={true}/>;
+    }
+
     return (
       <div className="columns">
         <div className="column is-one-third is-offset-one-third">
@@ -52,4 +57,8 @@ export default class LoginForm extends React.Component {
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };

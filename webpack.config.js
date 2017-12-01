@@ -1,11 +1,12 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
     'babel-polyfill',
-    path.join(path.resolve(__dirname), 'src', 'app.js'),
+    path.join(path.resolve(__dirname), 'src', 'app.jsx'),
   ],
   output: {
     path: path.join(path.resolve(__dirname), 'dist'),
@@ -44,6 +45,10 @@ module.exports = {
       template: path.join(path.resolve(__dirname), 'src', 'index.html'),
     }),
     new ExtractTextPlugin('bundle.css'),
+    new webpack.DefinePlugin({
+      API_URL: JSON.stringify('http://127.0.0.1:5000/v1/'),
+      AUTH_USER: JSON.stringify('authUser'),
+    }),
   ],
   resolve: {
     modules: ['node_modules', 'src'],

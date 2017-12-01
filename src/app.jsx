@@ -4,7 +4,6 @@ import {render} from 'react-dom';
 import {applyMiddleware, compose, createStore} from 'redux';
 import {Provider} from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
-import reduxLogger from 'redux-logger';
 
 import {BrowserRouter as Router} from 'react-router-dom';
 
@@ -16,7 +15,7 @@ import 'font-awesome/scss/font-awesome.scss';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(
-  applyMiddleware(/*reduxLogger, */thunkMiddleware),
+  applyMiddleware(thunkMiddleware),
 ));
 
 export default function App(props) {

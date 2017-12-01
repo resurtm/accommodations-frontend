@@ -12,7 +12,7 @@ export const loginUser = (email, password) => async dispatch => {
   } catch (error) {
     dispatch({type: USER_LOGIN_FAILURE, error});
   }
-}
+};
 
 export const USER_LOGOUT_REQUEST = 'USER_LOGOUT_REQUEST';
 export const USER_LOGOUT_SUCCESS = 'USER_LOGOUT_SUCCESS';
@@ -26,7 +26,7 @@ export const logoutUser = () => async dispatch => {
   } catch (error) {
     dispatch({type: USER_LOGOUT_FAILURE, error});
   }
-}
+};
 
 export const USER_REGISTER_REQUEST = 'USER_REGISTER_REQUEST';
 export const USER_REGISTER_SUCCESS = 'USER_REGISTER_SUCCESS';
