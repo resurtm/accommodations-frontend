@@ -29,7 +29,9 @@ export default function LoginFormField(props) {
       <div className={controlClasses.join(' ')}>
         <input className={props.state === null ? 'input' : 'input is-' + props.state}
                type={props.type}
-               placeholder={props.placeholder}/>
+               placeholder={props.placeholder}
+               value={props.value}
+               onChange={e => props.onChange(e.target.value)}/>
 
         {props.leftIcon === null ? null :
           <span className="icon is-small is-left">
