@@ -23,6 +23,18 @@ export default function Field(props) {
     controlClasses.push('has-icons-right');
   }
 
+  let errorText = null;
+  if (props.errorText !== null) {
+    if (Array.isArray(props.errorText)) {
+      errorText = [];
+      _.forEach(props.errorText, (v, k) => {
+        errorText.push(<p key={k} className={props.state === null ? 'help' : 'help is-' + props.state}>{v}</p>);
+      });
+    } else {
+      errorText = <p className={props.state === null ? 'help' : 'help is-' + props.state}>{props.errorText}</p>;
+    }
+  }
+
   return (
     <StyledField className="field">
       <label className="label">{props.label}:</label>
@@ -53,11 +65,7 @@ export default function Field(props) {
         </p>
       }
 
-      {props.errorText === null ? null :
-        <p className={props.state === null ? 'help' : 'help is-' + props.state}>
-          {props.errorText}
-        </p>
-      }
+      {errorText}
     </StyledField>
   );
 }
@@ -73,7 +81,10 @@ Field.propTypes = {
   rightIcon: PropTypes.string,
 
   helpText: PropTypes.string,
-  errorText: PropTypes.string,
+  errorText: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]),
 
   value: PropTypes.any.isRequired,
   onChange: PropTypes.func.isRequired,
