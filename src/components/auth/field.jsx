@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import {renderErrorText} from './tools';
 
 export default function Field(props) {
   let rightIcon = props.rightIcon === null ? null : props.rightIcon;
@@ -21,18 +22,6 @@ export default function Field(props) {
   }
   if (rightIcon !== null) {
     controlClasses.push('has-icons-right');
-  }
-
-  let errorText = null;
-  if (props.errorText !== null) {
-    if (Array.isArray(props.errorText)) {
-      errorText = [];
-      _.forEach(props.errorText, (v, k) => {
-        errorText.push(<p key={k} className={props.state === null ? 'help' : 'help is-' + props.state}>{v}</p>);
-      });
-    } else {
-      errorText = <p className={props.state === null ? 'help' : 'help is-' + props.state}>{props.errorText}</p>;
-    }
   }
 
   return (
@@ -65,7 +54,7 @@ export default function Field(props) {
         </p>
       }
 
-      {errorText}
+      {renderErrorText(props.errorText, props.state)}
     </StyledField>
   );
 }

@@ -42,11 +42,11 @@ export default class LoginForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const errors = validate(_.pick(this.state, ['email', 'password']), validationRules);
+    const attributes = _.omit(this.state, ['errors']);
+    const errors = validate(attributes, validationRules);
     this.setState({errors});
-
     if (!errors) {
-      this.props.onSubmit(this.state);
+      this.props.onSubmit(attributes);
     }
   }
 
@@ -74,7 +74,7 @@ export default class LoginForm extends React.Component {
             <Field type="email" label="Email" placeholder="johndoe1980@gmail.com" onChange={this.onEmailChange}
                    value={this.state.email} leftIcon="envelope" helpText="Your email you've used when signed up"
                    state={emailHasErrors ? 'danger' : null}
-                   errorText={this.state.errors && 'email' in this.state.errors ? this.state.errors.email : null}/>
+                   errorText={emailHasErrors ? this.state.errors.email : null}/>
             <Field type="password" label="Password" placeholder="s3cr3tpa$$w0rd" onChange={this.onPasswordChange}
                    value={this.state.password} leftIcon="key"
                    state={passwordHasErrors ? 'danger' : null}

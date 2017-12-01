@@ -13,7 +13,7 @@ import RoomsEditor from 'containers/rooms-editor';
 import Accommodations from 'components/accommodations';
 
 import SigninPage from 'components/auth/signin-page';
-import RegisterForm from 'components/auth/register-form';
+import SignupPage from 'components/auth/signup-page';
 
 import Preloading from 'containers/tools/preloading';
 import ErrorMessage from 'containers/tools/error-message';
@@ -37,7 +37,7 @@ class BaseMainContainer extends React.Component {
         <Route path="/accommodations" component={StandardLayout(Accommodations)}/>
 
         <Route path="/login" component={StandardLayout(SigninPage)}/>
-        <Route path="/register" component={StandardLayout(RegisterForm)}/>
+        <Route path="/register" component={StandardLayout(SignupPage)}/>
 
         <Footer/>
         <Preloading/>
