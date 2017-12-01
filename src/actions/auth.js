@@ -1,4 +1,4 @@
-import {signinUser, signoutUser} from 'service/auth';
+import {signinUser, signoutUser, checkAuthToken} from 'service/auth';
 import _ from 'lodash';
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
@@ -35,3 +35,17 @@ export const logoutUser = () => async dispatch => {
 export const USER_REGISTER_REQUEST = 'USER_REGISTER_REQUEST';
 export const USER_REGISTER_SUCCESS = 'USER_REGISTER_SUCCESS';
 export const USER_REGISTER_FAILURE = 'USER_REGISTER_FAILURE';
+
+export const CHECK_USER_AUTH_REQUEST = 'CHECK_USER_AUTH_REQUEST';
+export const CHECK_USER_AUTH_SUCCESS = 'CHECK_USER_AUTH_SUCCESS';
+export const CHECK_USER_AUTH_FAILURE = 'CHECK_USER_AUTH_FAILURE';
+
+export const checkUserAuth = () => async dispatch => {
+  dispatch({type: CHECK_USER_AUTH_REQUEST});
+  try {
+    await checkAuthToken();
+    dispatch({type: CHECK_USER_AUTH_SUCCESS});
+  } catch (error) {
+    dispatch({type: CHECK_USER_AUTH_FAILURE, error});
+  }
+};

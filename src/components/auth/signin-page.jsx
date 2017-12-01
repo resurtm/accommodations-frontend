@@ -6,7 +6,7 @@ import LoginForm from './login-form';
 const mapStateToProps = state => {
   return {
     loggedIn: state.auth.loggedIn,
-    error: state.auth.error,
+    error: state.auth.loggingError,
   };
 };
 
