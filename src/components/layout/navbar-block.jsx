@@ -4,18 +4,6 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function NavbarBlock(props) {
-  const navbarEnd = props.loggedIn ? (
-    <div className="navbar-end">
-      <a className="navbar-item" href="#">{props.email}</a>
-      <a className="navbar-item" href="#">Logout</a>
-    </div>
-  ) : (
-    <div className="navbar-end">
-      <Link to="/login" className="navbar-item">Login</Link>
-      <Link to="/register" className="navbar-item">Create Account</Link>
-    </div>
-  );
-
   return (
     <nav className="navbar is-transparent">
       <div className="container">
@@ -44,7 +32,17 @@ export default function NavbarBlock(props) {
           </div>
         </div>
 
-        {navbarEnd}
+        {props.loggedIn ?
+          <div className="navbar-end">
+            <a className="navbar-item" href="#">{props.email}</a>
+            <a className="navbar-item" onClick={() => props.onLogoutClick()}>Logout</a>
+          </div>
+        :
+          <div className="navbar-end">
+            <Link to="/login" className="navbar-item">Login</Link>
+            <Link to="/register" className="navbar-item">Create Account</Link>
+          </div>
+        }
 
       </div>
     </nav>
@@ -54,11 +52,13 @@ export default function NavbarBlock(props) {
 NavbarBlock.propTypes = {
   email: PropTypes.string,
   loggedIn: PropTypes.bool,
+  onLogoutClick: PropTypes.func,
 };
 
 NavbarBlock.defaultProps = {
   email: null,
   loggedIn: false,
+  onLogoutClick: () => {},
 };
 
 const LogoLink = styled(Link)`

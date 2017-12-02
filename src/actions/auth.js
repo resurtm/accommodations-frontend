@@ -1,5 +1,4 @@
-import {signinUser, signoutUser, checkAuthToken, signupUser} from 'service/auth';
-import _ from 'lodash';
+import {checkAuthToken, signinUser, signoutUser} from 'service/auth';
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -11,10 +10,7 @@ export const loginUser = (email, password) => async dispatch => {
     await signinUser(email, password);
     dispatch({type: USER_LOGIN_SUCCESS, email});
   } catch (error) {
-    dispatch({
-      type: USER_LOGIN_FAILURE,
-      error: _.get(error.response, 'data.msg', error.response.statusText),
-    });
+    dispatch({type: USER_LOGIN_FAILURE, error});
   }
 };
 
@@ -28,10 +24,7 @@ export const logoutUser = () => async dispatch => {
     await signoutUser();
     dispatch({type: USER_LOGOUT_SUCCESS});
   } catch (error) {
-    dispatch({
-      type: USER_LOGOUT_FAILURE,
-      error: _.get(error.response, 'data.msg', error.response.statusText),
-    });
+    dispatch({type: USER_LOGOUT_FAILURE, error});
   }
 };
 
@@ -49,9 +42,6 @@ export const checkUserAuth = () => async dispatch => {
     await checkAuthToken();
     dispatch({type: CHECK_USER_AUTH_SUCCESS});
   } catch (error) {
-    dispatch({
-      type: CHECK_USER_AUTH_FAILURE,
-      error: _.get(error.response, 'data.msg', error.response.statusText),
-    });
+    dispatch({type: CHECK_USER_AUTH_FAILURE, error});
   }
 };

@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import {logoutUser} from 'actions/auth';
 import NavbarBlock from './navbar-block';
 
 const mapStateToProps = state => {
@@ -10,7 +11,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    onLogoutClick: () => {
+      dispatch(logoutUser());
+    },
+  };
 };
 
 const NavbarSection = withRouter(connect(
