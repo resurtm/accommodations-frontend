@@ -14,6 +14,7 @@ export const signoutUser = async () => {
 };
 
 export const signupUser = async (username, email, password) => {
+  await axios.post(`${API_URL}auth/signup`, {username, email, password});
 };
 
 export const checkAuthToken = async () => {

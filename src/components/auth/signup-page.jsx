@@ -1,21 +1,26 @@
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import {registerUser} from 'actions/auth';
 import RegisterForm from './register-form';
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    loggedIn: state.auth.loggedIn,
+    error: state.auth.signingUpError,
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmit: (data) => {
-      console.log(data);
+    onSubmit: ({username, email, password}) => {
+      dispatch(registerUser(username, email, password));
     },
   };
 };
 
-const SignupPage = connect(
+const SignupPage = withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(RegisterForm);
+)(RegisterForm));
 
 export default SignupPage

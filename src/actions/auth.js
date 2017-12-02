@@ -1,4 +1,4 @@
-import {checkAuthToken, signinUser, signoutUser} from 'service/auth';
+import {checkAuthToken, signinUser, signoutUser, signupUser} from 'service/auth';
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -31,6 +31,17 @@ export const logoutUser = () => async dispatch => {
 export const USER_REGISTER_REQUEST = 'USER_REGISTER_REQUEST';
 export const USER_REGISTER_SUCCESS = 'USER_REGISTER_SUCCESS';
 export const USER_REGISTER_FAILURE = 'USER_REGISTER_FAILURE';
+
+export const registerUser = (username, email, password) => async dispatch => {
+  dispatch({type: USER_REGISTER_REQUEST});
+  try {
+    await signupUser(username, email, password);
+    dispatch({type: USER_REGISTER_SUCCESS});
+    dispatch(loginUser(email, password));
+  } catch (error) {
+    dispatch({type: USER_REGISTER_FAILURE, error});
+  }
+};
 
 export const CHECK_USER_AUTH_REQUEST = 'CHECK_USER_AUTH_REQUEST';
 export const CHECK_USER_AUTH_SUCCESS = 'CHECK_USER_AUTH_SUCCESS';

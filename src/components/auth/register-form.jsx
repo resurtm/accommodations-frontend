@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router';
 import PropTypes from 'prop-types';
 import Field from './field';
 import TosAgreement from './tos-agreement';
@@ -58,6 +59,12 @@ export default class RegisterForm extends React.Component {
     this.onTosAgreementChange = this.onTosAgreementChange.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      errors: {'username': nextProps.error},
+    });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
@@ -89,6 +96,10 @@ export default class RegisterForm extends React.Component {
   }
 
   render() {
+    if (this.props.loggedIn) {
+      return <Redirect to="/" push={true}/>;
+    }
+
     const usernameHasErrors = this.state.errors && 'username' in this.state.errors;
     const emailHasErrors = this.state.errors && 'email' in this.state.errors;
     const passwordHasErrors = this.state.errors && 'password' in this.state.errors;
@@ -131,4 +142,11 @@ export default class RegisterForm extends React.Component {
 
 RegisterForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  error: PropTypes.string,
 };
+
+RegisterForm.defaultProps = {
+  error: null,
+};
+
