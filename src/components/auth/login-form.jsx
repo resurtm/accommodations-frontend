@@ -42,7 +42,7 @@ export default class LoginForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const attributes = _.omit(this.state, ['errors']);
+    const attributes = _.pick(this.state, ['email', 'password']);
     const errors = validate(attributes, validationRules);
     this.setState({errors});
     if (!errors) {

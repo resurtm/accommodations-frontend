@@ -68,7 +68,10 @@ export default class RegisterForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const errors = validate(_.omit(this.state, ['errors']), validationRules);
+    const errors = validate(
+      _.pick(this.state, ['username', 'email', 'password', 'passwordRepeat', 'tosAgreement']),
+      validationRules,
+    );
     this.setState({errors});
     if (!errors) {
       this.props.onSubmit(_.pick(this.state, ['username', 'email', 'password']));

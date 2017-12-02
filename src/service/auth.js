@@ -6,6 +6,7 @@ export const signinUser = async (email, password) => {
     token: response.data.data.token,
     email,
   }));
+  axios.defaults.headers.common['Authorization'] = `bearer ${response.data.data.token}`;
 };
 
 export const signoutUser = async () => {

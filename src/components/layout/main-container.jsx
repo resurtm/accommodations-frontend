@@ -18,6 +18,7 @@ import SignupPage from 'components/auth/signup-page';
 import Preloading from 'containers/tools/preloading';
 import ErrorMessage from 'containers/tools/error-message';
 
+import {PrivateRoute} from 'components/auth/private-route';
 import {checkUserAuth} from 'actions/auth';
 
 class BaseMainContainer extends React.Component {
@@ -33,8 +34,8 @@ class BaseMainContainer extends React.Component {
         <NavbarSection/>
 
         <Route exact path="/" component={Home}/>
-        <Route path="/spots" component={StandardLayout(RoomsEditor)}/>
-        <Route path="/accommodations" component={StandardLayout(Accommodations)}/>
+        <PrivateRoute path="/spots" component={StandardLayout(RoomsEditor)}/>
+        <PrivateRoute path="/accommodations" component={StandardLayout(Accommodations)}/>
 
         <Route path="/login" component={StandardLayout(SigninPage)}/>
         <Route path="/register" component={StandardLayout(SignupPage)}/>
